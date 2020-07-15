@@ -5,28 +5,71 @@ using System.IO;
 
 public class IPHCreateTxt : MonoBehaviour {
 
-	void CreateTxt(){
-		//Creates a .txt document if its doesnt exists
+	//Location of configuration file
+	public static string path;
 
-		//Path to the file
-		//Usualy would be used Application.DataPath, but for mobile devices, Application.persistentDataPath works better because we 
-		//may not have direct write access to the dataPath of the project
-		string path = Application.persistentDataPath + "\\configLog.txt";
+	//All lines of configs txt
+	public static string[] lines;
+
+	// Use this for initialization
+	void Awake () {
+		//establishing the path of configuration txt
+		//Usualy would be used Application.DataPath, but for mobile devices, Application.persistentDataPath works better because we may not have direct write access to the dataPath of the project
+		path = Application.persistentDataPath + "\\configLog.txt";
+
+		CreateTxt();
+
+		lines = File.ReadAllLines(path);
+
+	}
+
+	private void CreateTxt(){
+		//Creates a .txt document if its doesnt exists
 
 		//Verifying if .txt already exists
 		if(!File.Exists(path)){
 			File.WriteAllText(path, 
 				"snd 1\nmsc 1\n--achievements\ns3p 0\ns10 0\nc2p 0\nc5p 0\nj2p 0\ndco 0\ndga 0\ndca 0\ndpo 0\ndpa 0\n");
 		}
+		/// <summary>
+		// Each initials on the txt stands for some game feature, as below:
+		// snd: sound (0 off; 1 on)
+		// msc: music (0 off; 1 on)
+		// s3p: jump 3 plataforms ('saltar 3 plataformas'); counter
+		// s10: jump 10 plataforms ('saltar 10 plataformas'); counter
+		// c2p: collect 2 power-ups; counter
+		// c5p: collect 5 power-ups; counter
+		// j2p: play two matches ('jogar duas partidas'); counter
+		// cdo: unlock rabbit ('desbloquear coelinho'); true/false
+		// dga: unlock cat ('debloquear gatinho'); true/false
+		// dca: unlock cod ('debloquear cachorrinho'); true/false
+		// dpo: unlock pig ('debloquear porquinho'); true/false
+		// dpa: unlock panda ('debloquear pandinha'); true/false
+		/// </summary>
 	}
 
-	// Use this for initialization
-	void Start () {
-		CreateTxt();
+	public float ReadTxt(string LineTxt){
+		//Reads the configuration txt and returns the estate of settings
+
+		foreach (string line in lines){
+			if (line.Substring(0, 3) == LineTxt){
+				return float.Parse(line[line.Length - 1].ToString());
+			}
+		}
+		return 1;
+	}
+
+	public void WriteTxt(string LineTxt, float NewValue){
+		//Writes on the configuration's txt
+
+		for (int i = 0; i <= lines.Length ; i++){
+			if (lines[i].Substring(0, 3) == LineTxt){
+				//Changing the line of txt with desired configuration
+				lines[i] = LineTxt + " " + NewValue.ToString();
+				File.WriteAllLines(path, lines);
+				break;
+			}
+		}	
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }

@@ -11,14 +11,11 @@ namespace InfiniteHopper
 	/// </summary>
 	public class IPHToggleSound:MonoBehaviour
 	{
-		//Location of configuration file
-		private string path;
-
-		//All lines of configs txt
-		private string[] lines;
-
 		//will set which sound configuration will be changed (sound or music)
 		private string SoundTarget;
+
+		//The object that will provide the function to read and write on txt 
+		public Transform TextManipulator;
 
 		//The tag of the sound object
 		public string soundObjectTag = "GameController";
@@ -36,54 +33,25 @@ namespace InfiniteHopper
 		/// objects or query them using eg. GameObject.FindWithTag. Each GameObject's Awake is called in a random order between objects. 
 		/// Because of this, you should use Awake to set up references between scripts, and use Start to pass any information back and forth. 
 		/// Awake is always called before any Start functions. This allows you to order initialization of scripts. Awake can not act as a coroutine.
+		///
+		/// Why is it start() and not awake(): so it wont conflict with awake from IPHCreateTxt  
 		/// </summary>
-		void Awake()
+		void Start()
 		{			
-			//establishing the path of configuration txt
-			path = Application.persistentDataPath + "\\configLog.txt";
-
 			if ( !soundObject && soundObjectTag != string.Empty )    soundObject = GameObject.FindGameObjectWithTag(soundObjectTag).transform;			
 		
 			//Reading the configuration's txt and establishing the configurations accordingly to the file
-			string SoundTarget;
 			if(soundObjectTag == "GameController"){
 				SoundTarget = "snd"; //Sound
 			}else{
 				SoundTarget = "msc"; //Music
 			}
 
-			currentState = SoundReadTxt(SoundTarget);
+			currentState = TextManipulator.GetComponent<IPHCreateTxt>().ReadTxt(SoundTarget);
 
 			SetSound();
 		}
 
-		public int SoundReadTxt(string ButtonFunction){
-			//Reads the configuration txt and returns the estate of settings
-
-			lines = File.ReadAllLines(path);
-
-			foreach (string line in lines){
-				if (line.Substring(0, 3) == ButtonFunction){
-					return int.Parse(line[line.Length - 1].ToString());
-				}
-			}
-			return 1;
-		}
-
-		public void WriteTxtSound(string ButtonFunction){
-			//Writes on the configuration's txt new settings
-
-			string[] arrLine = File.ReadAllLines(path);
-
-			for (int i = 0; i <= arrLine.Length ; i++){
-				if (arrLine[i].Substring(0, 3) == ButtonFunction){
-					//Changing the line of txt with desired configuration
-					arrLine[i] = ButtonFunction + " " + currentState.ToString();
-					File.WriteAllLines(path, arrLine);
-					break;
-				}
-			}	
-		}
 	
 		/// <summary>
 		/// Sets the sound volume
@@ -122,7 +90,7 @@ namespace InfiniteHopper
 			}
 
 			//Writing on the txt
-			WriteTxtSound(SoundTarget);
+			TextManipulator.GetComponent<IPHCreateTxt>().WriteTxt(SoundTarget, currentState);
 
 			SetSound();
 		}
