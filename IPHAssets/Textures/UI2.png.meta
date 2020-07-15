@@ -1,0 +1,309 @@
+fileFormatVersion: 2
+guid: 24a5d5ae7319b44198ba2daf616bcc20
+timeCreated: 1457280473
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: UI2_0
+    21300002: UI2_1
+    21300004: UI2_2
+    21300006: UI2_3
+    21300008: UI2_4
+    21300010: UI2_5
+    21300012: UI2_6
+    21300014: UI2_7
+    21300016: UI2_8
+    21300018: UI2_9
+    21300020: UI2_10
+    21300022: UI2_11
+    21300024: UI2_12
+    21300026: UI2_13
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -3
+  maxTextureSize: 1024
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: UI2_0
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 956
+        width: 55
+        height: 63
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -8.5, y: 31.5}
+        - {x: -20.5, y: 27.5}
+        - {x: -27.5, y: -7.5}
+        - {x: -27.5, y: -31.5}
+        - {x: 22.5, y: -31.5}
+        - {x: 27.5, y: -24.5}
+        - {x: 27.5, y: 31.5}
+    - name: UI2_1
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 961
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -30, y: 30}
+        - {x: -30, y: -30}
+        - {x: 30, y: -30}
+        - {x: 30, y: 30}
+    - name: UI2_2
+      rect:
+        serializedVersion: 2
+        x: 130
+        y: 894
+        width: 32
+        height: 120
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -16, y: 60}
+        - {x: -16, y: -60}
+        - {x: 16, y: -60}
+        - {x: 16, y: 60}
+    - name: UI2_3
+      rect:
+        serializedVersion: 2
+        x: 185
+        y: 889
+        width: 104
+        height: 132
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -9, y: 66}
+        - {x: -52, y: 66}
+        - {x: -52, y: -62}
+        - {x: -43, y: -66}
+        - {x: -4, y: -66}
+        - {x: 46, y: -28}
+        - {x: 52, y: -10}
+        - {x: 52, y: 29}
+    - name: UI2_4
+      rect:
+        serializedVersion: 2
+        x: 301
+        y: 892
+        width: 154
+        height: 130
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 69, y: -14}
+        - {x: 76, y: -2}
+        - {x: 75, y: 22}
+        - {x: 65, y: 27}
+        - {x: 77, y: 56}
+        - {x: 77, y: 60}
+        - {x: 72, y: 65}
+        - {x: -75, y: 65}
+        - {x: -77, y: 64}
+        - {x: -77, y: -40}
+        - {x: -75, y: -65}
+        - {x: -22, y: -65}
+        - {x: 70, y: -48}
+        - {x: 77, y: -41}
+        - {x: 77, y: -21}
+    - name: UI2_6
+      rect:
+        serializedVersion: 2
+        x: 466
+        y: 885
+        width: 138
+        height: 138
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -64, y: 69}
+        - {x: -69, y: 64}
+        - {x: -69, y: -56}
+        - {x: -40, y: -69}
+        - {x: 69, y: -69}
+        - {x: 69, y: 53}
+        - {x: 43, y: 69}
+    - name: UI2_7
+      rect:
+        serializedVersion: 2
+        x: 628
+        y: 783
+        width: 282
+        height: 238
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 104, y: -119}
+        - {x: 130, y: -75}
+        - {x: 141, y: -70}
+        - {x: 141, y: 100}
+        - {x: 101, y: 119}
+        - {x: 49, y: 119}
+        - {x: 49, y: 101}
+        - {x: -39, y: 101}
+        - {x: -45, y: 117}
+        - {x: -49, y: 119}
+        - {x: -100, y: 119}
+        - {x: -101, y: 99}
+        - {x: -138, y: 99}
+        - {x: -141, y: 96}
+        - {x: -141, y: -83}
+        - {x: -101, y: -80}
+        - {x: -101, y: -111}
+        - {x: -91, y: -119}
+        - {x: -45, y: -119}
+        - {x: 11, y: -77}
+        - {x: 49, y: -111}
+        - {x: 58, y: -119}
+    - name: UI2_8
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 892
+        width: 75
+        height: 60
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -11.5, y: 30}
+        - {x: -37.5, y: 21}
+        - {x: -37.5, y: -28}
+        - {x: -28.5, y: -30}
+        - {x: 37.5, y: -30}
+        - {x: 37.5, y: 30}
+    - name: UI2_9
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 893
+        width: 41
+        height: 60
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -20.5, y: 30}
+        - {x: -20.5, y: -28}
+        - {x: -19.5, y: -30}
+        - {x: -1.5, y: -30}
+        - {x: 20.5, y: -8}
+        - {x: 20.5, y: 19}
+        - {x: 2.5, y: 30}
+    - name: UI2_11
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 825
+        width: 62
+        height: 62
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 20, y: 31}
+        - {x: -13, y: 31}
+        - {x: -20, y: 28}
+        - {x: -28, y: 20}
+        - {x: -31, y: 13}
+        - {x: -31, y: -13}
+        - {x: -28, y: -20}
+        - {x: -22, y: -31}
+        - {x: 18, y: -31}
+        - {x: 21, y: -29}
+        - {x: 31, y: -15}
+        - {x: 31, y: 19}
+    - name: UI2_12
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 18
+        width: 365
+        height: 114
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -173.5, y: 57}
+        - {x: -180.5, y: 51}
+        - {x: -182.5, y: 49}
+        - {x: -182.5, y: -57}
+        - {x: 172.5, y: -57}
+        - {x: 182.5, y: -52}
+        - {x: 182.5, y: 57}
+    - name: UI2_13
+      rect:
+        serializedVersion: 2
+        x: 404
+        y: 18
+        width: 365
+        height: 114
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -173.5, y: 57}
+        - {x: -180.5, y: 51}
+        - {x: -182.5, y: 49}
+        - {x: -182.5, y: -57}
+        - {x: 172.5, y: -57}
+        - {x: 182.5, y: -52}
+        - {x: 182.5, y: 57}
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

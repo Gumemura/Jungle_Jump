@@ -1,0 +1,236 @@
+fileFormatVersion: 2
+guid: 51a61cd040c2cce40a0259ddba361763
+timeCreated: 1457125334
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Powerups_0
+    21300002: Powerups_1
+    21300004: Powerups_2
+    21300006: Powerups_3
+    21300008: Powerups_4
+    21300010: Powerups_5
+    21300012: Powerups_6
+    21300014: Powerups_7
+    21300016: Powerups_8
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -3
+  maxTextureSize: 1024
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: Powerups_0
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 154
+        width: 101
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -50.5, y: 50.5}
+        - {x: -50.5, y: -44.5}
+        - {x: -34.5, y: -50.5}
+        - {x: 20.5, y: -50.5}
+        - {x: 37.5, y: -46.5}
+        - {x: 50.5, y: -22.5}
+        - {x: 50.5, y: 28.5}
+        - {x: 31.5, y: 50.5}
+      - - {x: -30.5, y: -19.5}
+        - {x: -21.5, y: 28.5}
+        - {x: 29.5, y: 17.5}
+        - {x: 27.5, y: -20.5}
+    - name: Powerups_1
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 173
+        width: 82
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 27, y: 40.5}
+        - {x: -27, y: 40.5}
+        - {x: -40, y: 34.5}
+        - {x: -41, y: 28.5}
+        - {x: -41, y: -21.5}
+        - {x: -26, y: -38.5}
+        - {x: -17, y: -40.5}
+        - {x: 16, y: -40.5}
+        - {x: 35, y: -25.5}
+        - {x: 41, y: -1.5}
+        - {x: 41, y: 34.5}
+    - name: Powerups_2
+      rect:
+        serializedVersion: 2
+        x: 189
+        y: 174
+        width: 62
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 29, y: 29.5}
+        - {x: 19, y: 38.5}
+        - {x: -22, y: 38.5}
+        - {x: -31, y: 32.5}
+        - {x: -31, y: -13.5}
+        - {x: -16, y: -38.5}
+        - {x: 11, y: -38.5}
+        - {x: 16, y: -33.5}
+        - {x: 31, y: -10.5}
+        - {x: 31, y: 20.5}
+    - name: Powerups_3
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 46
+        width: 105
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -28.5, y: 53}
+        - {x: -52.5, y: 41}
+        - {x: -52.5, y: -35}
+        - {x: -35.5, y: -53}
+        - {x: 28.5, y: -53}
+        - {x: 52.5, y: -43}
+        - {x: 52.5, y: 36}
+        - {x: 37.5, y: 53}
+    - name: Powerups_4
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 114
+        width: 64
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -30, y: 27}
+        - {x: -32, y: 23}
+        - {x: -32, y: -27}
+        - {x: 32, y: -27}
+        - {x: 32, y: 27}
+    - name: Powerups_5
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 85
+        width: 66
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -18, y: 40.5}
+        - {x: -19, y: 39.5}
+        - {x: -33, y: 30.5}
+        - {x: -33, y: -20.5}
+        - {x: -26, y: -40.5}
+        - {x: 20, y: -40.5}
+        - {x: 33, y: -31.5}
+        - {x: 33, y: 23.5}
+        - {x: 24, y: 40.5}
+    - name: Powerups_6
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 57
+        width: 64
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -32, y: 27}
+        - {x: -32, y: -27}
+        - {x: 32, y: -27}
+        - {x: 32, y: 27}
+    - name: Powerups_7
+      rect:
+        serializedVersion: 2
+        x: 189
+        y: 5
+        width: 61
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -30.5, y: 36}
+        - {x: -30.5, y: -36}
+        - {x: 30.5, y: -36}
+        - {x: 30.5, y: 28}
+        - {x: 23.5, y: 36}
+    - name: Powerups_8
+      rect:
+        serializedVersion: 2
+        x: 110
+        y: 0
+        width: 67
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -23.5, y: 27}
+        - {x: -27.5, y: 25}
+        - {x: -33.5, y: 6}
+        - {x: -33.5, y: -19}
+        - {x: -22.5, y: -27}
+        - {x: 33.5, y: -27}
+        - {x: 33.5, y: 27}
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

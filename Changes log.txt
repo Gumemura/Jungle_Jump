@@ -1,0 +1,14 @@
+Guilherme Umemura
+
+Changes log
+
+IPHGameController
+	initialization of unity ads droped to the last execution of Start() function because it's was preventing the function to be called on mobile devices
+
+- Persistent sound
+New class: IPHCreateTxt
+	Creates a txt files that will store all persistent data
+	
+IPHToggleSound
+	created a new function SoundReadTxt that reads the txt configuration's file and set the conditions of sounds and music
+	created a new function WriteTxtSound that writes on the txt configuration's file
