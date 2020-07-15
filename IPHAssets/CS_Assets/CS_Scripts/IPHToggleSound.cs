@@ -34,7 +34,7 @@ namespace InfiniteHopper
 		/// Because of this, you should use Awake to set up references between scripts, and use Start to pass any information back and forth. 
 		/// Awake is always called before any Start functions. This allows you to order initialization of scripts. Awake can not act as a coroutine.
 		///
-		/// Why is it start() and not awake(): so it wont conflict with awake from IPHCreateTxt  
+		/// Why is it start() and not awake(): so it wont conflict with awake from IPHTxtManipulation  
 		/// </summary>
 		void Start()
 		{			
@@ -47,7 +47,7 @@ namespace InfiniteHopper
 				SoundTarget = "msc"; //Music
 			}
 
-			currentState = TextManipulator.GetComponent<IPHCreateTxt>().ReadTxt(SoundTarget);
+			currentState = TextManipulator.GetComponent<IPHTxtManipulation>().ReadTxt(SoundTarget);
 
 			SetSound();
 		}
@@ -90,7 +90,7 @@ namespace InfiniteHopper
 			}
 
 			//Writing on the txt
-			TextManipulator.GetComponent<IPHCreateTxt>().WriteTxt(SoundTarget, currentState);
+			TextManipulator.GetComponent<IPHTxtManipulation>().WriteTxt(SoundTarget, currentState);
 
 			SetSound();
 		}
