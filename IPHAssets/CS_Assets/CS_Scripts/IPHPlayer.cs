@@ -13,7 +13,10 @@ namespace InfiniteHopper
 		internal GameObject gameController;
 
 		//Text manipulator
-		public Transform TxtManipulator;
+		public Transform AchievementeManager;
+
+		//counts the time player hits a plataform. it avoids the first hit with the plataform to be coutned
+		internal int hitCounter = 0;
 		
 		//How fast the player's jump power increases when we are holding the jump button
 		public float jumpChargeSpeed = 30;
@@ -252,7 +255,6 @@ namespace InfiniteHopper
 						//If there is a sound source and a sound assigned, play it from the source
 						if ( soundEndJump )    soundSource.GetComponent<AudioSource>().PlayOneShot(soundEndJump);
 					}
-					
 				}
 			}
 		}
@@ -260,6 +262,13 @@ namespace InfiniteHopper
 		//This function runs when the player succesfully lands on a column
 		void  PlayerLanded()
 		{
+			if(hitCounter < 1){
+				hitCounter++;
+			}else{
+				//Raising counter of successful jumps
+				AchievementeManager.GetComponent<IPHAchievementsManager>().RaiseCounter("jmp");
+			}
+
 			isLanded = true;
 			
 			//Play the landing animation

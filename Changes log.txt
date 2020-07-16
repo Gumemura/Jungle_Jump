@@ -16,3 +16,9 @@ New class: IPHTxtManipulation
 	have two functions: one reads a txt, another one writes on it
 	planned to be globaly used
 
+- Achievement
+New class: IPHAchievementsManager
+	its manage the Achievements
+	stores data in persistent form, trought txt (same used to store sound configurations)
+
+
