@@ -12,7 +12,7 @@ public class IPHTxtManipulation : MonoBehaviour {
 	public static string[] lines;
 
 	// Use this for initialization
-	void Awake () {
+	void Start () {
 		//establishing the path of configuration txt
 		//Usualy would be used Application.DataPath, but for mobile devices, Application.persistentDataPath works better because we may not have direct write access to the dataPath of the project
 		path = Application.persistentDataPath + "\\configLog.txt";
@@ -25,25 +25,22 @@ public class IPHTxtManipulation : MonoBehaviour {
 	public float ReadTxt(string LineTxt){
 		//Reads the configuration txt and returns the estate of settings
 
-
 		foreach (string line in lines){
-			if (line.Substring(0, 3) == LineTxt){
-				return float.Parse(line.Substring(4, line.Length - 4).ToString());
+			if (line.Substring(1, 3) == LineTxt){
+				return float.Parse(line.Substring(5, line.Length - 5).ToString());
 			}
 		}
 		return 1;
 	}
 
 	public void WriteTxt(string LineTxt, float NewValue){
-		//Writes on the configuration's txt
-
 		for (int i = 0; i <= lines.Length ; i++){
-			if (lines[i].Substring(0, 3) == LineTxt){
+			if (lines[i].Substring(1, 3) == LineTxt){
 				//Changing the line of txt with desired configuration
-				lines[i] = LineTxt + " " + NewValue.ToString();
+				lines[i] = lines[i][0] + LineTxt + " " + NewValue.ToString();
 				File.WriteAllLines(path, lines);
 				break;
 			}
-		}	
+		}
 	}
 }

@@ -23,13 +23,14 @@ public class IPHCreateTxt : MonoBehaviour {
 		//Verifying if .txt already exists
 		if(!File.Exists(path)){
 			File.WriteAllText(path, 
-				"snd 1\nmsc 1\n--achievements\ns3p 0\ns10 0\nc2p 0\nc5p 0\nj2p 0\ndco 0\ndga 0\ndca 0\ndpo 0\ndpa 0\n");
+				"0snd 1\n0msc 1\n--achievements\n0s3p 0\n0s10 0\n0c2p 0\n0c5p 0\n0j2p 0\n0dco 0\n0dga 0\n0dca 0\n0dpo 0\n0dpa 0\n");
 		}
 		/// <summary>
+		// The first number indicates if the achievements have been acomplished. Its not useful for configuration
 		// Each initials on the txt stands for some game feature, as below:
 		// snd: sound (0 off; 1 on)
 		// msc: music (0 off; 1 on)
-
+		//--achievements
 		// s3p: jump 3 plataforms ('saltar 3 plataformas'); counter
 		// s10: jump 10 plataforms ('saltar 10 plataformas'); counter
 		// c2p: collect 2 power-ups; counter
