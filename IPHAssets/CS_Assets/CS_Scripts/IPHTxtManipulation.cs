@@ -26,8 +26,8 @@ public class IPHTxtManipulation : MonoBehaviour {
 		//Reads the configuration txt and returns the estate of settings
 
 		foreach (string line in lines){
-			if (line.Substring(1, 3) == LineTxt){
-				return float.Parse(line.Substring(5, line.Length - 5).ToString());
+			if (line.Substring(0, 3) == LineTxt){
+				return float.Parse(line.Substring(4, line.Length - 4).ToString());
 			}
 		}
 		return 1;
@@ -35,9 +35,9 @@ public class IPHTxtManipulation : MonoBehaviour {
 
 	public void WriteTxt(string LineTxt, float NewValue){
 		for (int i = 0; i <= lines.Length ; i++){
-			if (lines[i].Substring(1, 3) == LineTxt){
+			if (lines[i].Substring(0, 3) == LineTxt){
 				//Changing the line of txt with desired configuration
-				lines[i] = lines[i][0] + LineTxt + " " + NewValue.ToString();
+				lines[i] = LineTxt + " " + NewValue.ToString();
 				File.WriteAllLines(path, lines);
 				break;
 			}

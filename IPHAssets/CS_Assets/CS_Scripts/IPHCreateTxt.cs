@@ -23,7 +23,7 @@ public class IPHCreateTxt : MonoBehaviour {
 		//Verifying if .txt already exists
 		if(!File.Exists(path)){
 			File.WriteAllText(path, 
-				"0snd 1\n0msc 1\n--achievements\n0s3p 0\n0s10 0\n0c2p 0\n0c5p 0\n0j2p 0\n0dco 0\n0dga 0\n0dca 0\n0dpo 0\n0dpa 0\n");
+				"snd 1\nmsc 1\n--achievements\ns3p 0\ns10 0\nc2p 0\nc5p 0\nj2p 0\ndco 0\ndga 0\ndca 0\ndpo 0\ndpa 0\n--counters\njmp 0\npwr 0\nmat 0");
 		}
 		/// <summary>
 		// The first number indicates if the achievements have been acomplished. Its not useful for configuration
@@ -41,6 +41,10 @@ public class IPHCreateTxt : MonoBehaviour {
 		// dca: unlock cod ('debloquear cachorrinho'); true/false
 		// dpo: unlock pig ('debloquear porquinho'); true/false
 		// dpa: unlock panda ('debloquear pandinha'); true/false
+		//--achievements
+		// jmp: counter of jumps
+		// pwr: counter of colected power-ups
+		// mat: counter of matches
 		/// </summary>
 	}
 }
