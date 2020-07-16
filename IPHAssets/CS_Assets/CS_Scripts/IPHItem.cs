@@ -10,6 +10,15 @@ namespace InfiniteHopper
 	/// </summary>
 	public class IPHItem:MonoBehaviour 
 	{
+		//The achievemente manager that will provide us the functions to update data
+		internal Transform achievementeManager;
+
+		//The achievemente manager tag we will use to find AchievementeManager tranform
+		public string achievementeManagerTag = "AchievementManager";
+
+		//Diferenciate tokens from power up
+		public string powerUpTag = "PowerUp";
+
 		//The tag of the object that can touch this item
 		public string hitTargetTag = "Player";
 		
@@ -22,12 +31,26 @@ namespace InfiniteHopper
 		//The sound that plays when this object is touched
 		public AudioClip soundHit;
 		public string soundSourceTag = "GameController";
+
+		void Start(){
+			//Finding the achievemente Manager tranform
+			achievementeManager = GameObject.FindWithTag(achievementeManagerTag).transform;
+		}
 		
 		//This function runs when this obstacle touches another object with a trigger collider
 		void  OnTriggerEnter2D ( Collider2D other  ){	
+
 			//Check if the object that was touched has the correct tag
 			if ( other.tag == hitTargetTag )
 			{
+				if(transform.gameObject.tag == powerUpTag){
+					//Updating data of collected power-ups 
+					achievementeManager.GetComponent<IPHAchievementsManager>().RaiseCounter("pwr");
+				}else{
+					//Updating data of collected tokens
+					achievementeManager.GetComponent<IPHAchievementsManager>().RaiseCounter("tkn");
+				}
+
 				//Go through the list of functions and runs them on the correct targets
 				foreach( TouchFunction touchFunction in touchFunctions )
 				{

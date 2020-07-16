@@ -12,7 +12,7 @@ namespace InfiniteHopper
 		internal Transform thisTransform;
 		internal GameObject gameController;
 
-		//Text manipulator
+		//The achievemente manager that will provide us the functions to update data
 		public Transform AchievementeManager;
 
 		//counts the time player hits a plataform. it avoids the first hit with the plataform to be coutned

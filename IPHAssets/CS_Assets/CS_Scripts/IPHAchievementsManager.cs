@@ -30,11 +30,19 @@ public class IPHAchievementsManager : MonoBehaviour {
 	public const int maxJumps = 10;
 	public const int maxPowers = 5;
 	public const int maxMatches = 2;
+	public const int maxTokens = 25;
+
 
 	//Public because it will be called from other scripts
 	private float plataformJumps = 0;
 	private float collectedPower = 0;
 	private float matches = 0;
+	private float tokens = 0;
+
+	//Array with actions codes. Will be used to update values
+	string[] actionCodes = {"jmp", "pwr", "mat", "tkn"} ;
+
+	//IMPROVEMENT: counters, max, and actions code could be integrated on arrays
 
 	//Will be displayed to player
 	public Transform AchievementNotification; 
@@ -43,9 +51,9 @@ public class IPHAchievementsManager : MonoBehaviour {
 	//Achievement Code on txt | Necessary quantity for acomplishment | Message displayed when acomplished | Is completed?
 	ArrayList PlataformJump03 = new ArrayList() {"s3p", 3, "3 plataforms jumped!", 0};
 	ArrayList PlataformJump10 = new ArrayList() {"s10", 10, "10 plataforms jumped!", 0};
+	ArrayList Play2Matches = new ArrayList() {"j2p", 2, "2 matches played!", 0};
 	ArrayList ColletedPowerUp2 = new ArrayList() {"c2p", 2, "2 power-ups collecteds!", 0};
 	ArrayList ColletedPowerUp5 = new ArrayList() {"c5p", 5, "5 power-ups collecteds!", 0};
-	ArrayList Play2Matches = new ArrayList() {"j2p", 2, "2 matches played!", 0};
 	ArrayList RabbitUnlocked = new ArrayList() {"dco", 5, "Rabbit unlocked!", 0};
 	ArrayList CatUnlocked = new ArrayList() {"dga", 10, "Cat unlocked!", 0};
 	ArrayList DogUnlocked = new ArrayList() {"dca", 15, "Penguim dog unlocked!", 0};
@@ -55,8 +63,6 @@ public class IPHAchievementsManager : MonoBehaviour {
 	//List with all achievements
 	List<ArrayList> AllAchievements = new List<ArrayList>();
 
-	//Array with actions codes. Will be used to update values
-	string[] actionCodes = {"jmp", "pwr", "mat"} ;
  
 	// int PlataformJump;
 	// int ColetedPowerUp;
@@ -69,17 +75,7 @@ public class IPHAchievementsManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		AllAchievements.Add(PlataformJump03);
-		AllAchievements.Add(PlataformJump10);
-		AllAchievements.Add(ColletedPowerUp2);
-		AllAchievements.Add(ColletedPowerUp5);
-		AllAchievements.Add(Play2Matches);
-		AllAchievements.Add(RabbitUnlocked);
-		AllAchievements.Add(CatUnlocked);
-		AllAchievements.Add(DogUnlocked);
-		AllAchievements.Add(PigUnlocked);
-		AllAchievements.Add(PandaUnlocked);
-
+		//Updating infos from txt
 		GetTxtValues();
 
 		soundSource = GameObject.FindGameObjectWithTag("GameController");
@@ -103,31 +99,48 @@ public class IPHAchievementsManager : MonoBehaviour {
 	}
 
 	private void GetTxtValues(){
+		//All achievements are unified on a single array for easy manipulation on this function
+		AllAchievements.Add(PlataformJump03);
+		AllAchievements.Add(PlataformJump10);
+		AllAchievements.Add(Play2Matches);
+		AllAchievements.Add(ColletedPowerUp2);
+		AllAchievements.Add(ColletedPowerUp5);
+		AllAchievements.Add(RabbitUnlocked);
+		AllAchievements.Add(CatUnlocked);
+		AllAchievements.Add(DogUnlocked);
+		AllAchievements.Add(PigUnlocked);
+		AllAchievements.Add(PandaUnlocked);
+
 		//Update the progress of all achievements from the txt
 		foreach (ArrayList achievement in AllAchievements){
 			achievement[3] = TextManipulator.GetComponent<IPHTxtManipulation>().ReadTxt((string)achievement[0]);
 		}
 
 		foreach (string code in actionCodes){
-			if(code == "jmp"){
-				plataformJumps = TextManipulator.GetComponent<IPHTxtManipulation>().ReadTxt(code);
-			}else if(code == "pwr"){
-				collectedPower = TextManipulator.GetComponent<IPHTxtManipulation>().ReadTxt(code);
-			}else if(code == "mat"){
-				matches = TextManipulator.GetComponent<IPHTxtManipulation>().ReadTxt(code);
+			switch(code){
+				case "jmp":
+					plataformJumps = TextManipulator.GetComponent<IPHTxtManipulation>().ReadTxt(code);
+					break;
+				case "pwr":
+					collectedPower = TextManipulator.GetComponent<IPHTxtManipulation>().ReadTxt(code);
+					break;
+				case "mat":
+					matches = TextManipulator.GetComponent<IPHTxtManipulation>().ReadTxt(code);
+					break;
+				case "tkn":
+					tokens = TextManipulator.GetComponent<IPHTxtManipulation>().ReadTxt(code);
+					break;
 			}
 		}
 	}
 
 	public void RaiseCounter(string actionCode){
 		//Will increase the counters of jump, power-up and matches and record it on the txt
-
 		switch(actionCode) {
 			case "jmp":
 				//Is possible to remove this if and keep track of all progrees play is making
 				if(plataformJumps < maxJumps){
 					TextManipulator.GetComponent<IPHTxtManipulation>().WriteTxt("jmp", ++plataformJumps);
-					//AcomplishmentCheck_Jump();
 					AcomplishmentCheck(PlataformJump03, plataformJumps);
 					AcomplishmentCheck(PlataformJump10, plataformJumps);
 				}
@@ -135,14 +148,25 @@ public class IPHAchievementsManager : MonoBehaviour {
 			case "pwr":
 				if(collectedPower < maxPowers){
 					TextManipulator.GetComponent<IPHTxtManipulation>().WriteTxt("pwr", ++collectedPower);
-					//AcomplishmentCheck_PowerUp();
+					AcomplishmentCheck(ColletedPowerUp2, collectedPower);
+					AcomplishmentCheck(ColletedPowerUp5, collectedPower);
+
 				}
 				break;
 			case "mat":
 				if(matches < maxMatches){
 					TextManipulator.GetComponent<IPHTxtManipulation>().WriteTxt("mat", ++matches);
-					//AcomplishmentCheck_Matches();
 					AcomplishmentCheck(Play2Matches, matches);
+				}
+				break;
+			case "tkn":
+				if(collectedPower < maxPowers){
+					TextManipulator.GetComponent<IPHTxtManipulation>().WriteTxt("tkn", ++tokens);
+					AcomplishmentCheck(RabbitUnlocked, tokens);
+					AcomplishmentCheck(CatUnlocked, tokens);
+					AcomplishmentCheck(DogUnlocked, tokens);
+					AcomplishmentCheck(PigUnlocked, tokens);
+					AcomplishmentCheck(PandaUnlocked, tokens);
 				}
 				break;
 			default:
@@ -157,8 +181,6 @@ public class IPHAchievementsManager : MonoBehaviour {
 			AchievementMsgBox((string)achievement[2]);
 		}
 	}
-
-	//private void AcomplishmentCheck_PowerUp()
 
 	private bool IsCompleted(ArrayList Achievement){
 		//Return false if achievement is no completed and true otherwise
