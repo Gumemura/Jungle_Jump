@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Runtime;
+using UnityEngine.SceneManagement;
 
 //This class will manage all achievements and keep record of progress to conclusion
 public class IPHAchievementsManager : MonoBehaviour {
@@ -82,6 +83,11 @@ public class IPHAchievementsManager : MonoBehaviour {
 		GetTxtValues();
 
 		soundSource = GameObject.FindGameObjectWithTag("GameController");
+
+		//Checking if the scene loaded is the game scene so we can keep track of the matches played achievement
+		if(SceneManager.GetActiveScene().name == "CS_Game"){
+			RaiseCounter("mat");
+		}
 	}
 	
 	// Update is called once per frame
@@ -121,7 +127,9 @@ public class IPHAchievementsManager : MonoBehaviour {
 				//Is possible to remove this if and keep track of all progrees play is making
 				if(plataformJumps < maxJumps){
 					TextManipulator.GetComponent<IPHTxtManipulation>().WriteTxt("jmp", ++plataformJumps);
-					AcomplishmentCheck_Jump();
+					//AcomplishmentCheck_Jump();
+					AcomplishmentCheck(PlataformJump03, plataformJumps);
+					AcomplishmentCheck(PlataformJump10, plataformJumps);
 				}
 				break;
 			case "pwr":
@@ -132,8 +140,9 @@ public class IPHAchievementsManager : MonoBehaviour {
 				break;
 			case "mat":
 				if(matches < maxMatches){
-					TextManipulator.GetComponent<IPHTxtManipulation>().WriteTxt("pwr", ++matches);
+					TextManipulator.GetComponent<IPHTxtManipulation>().WriteTxt("mat", ++matches);
 					//AcomplishmentCheck_Matches();
+					AcomplishmentCheck(Play2Matches, matches);
 				}
 				break;
 			default:
@@ -141,28 +150,15 @@ public class IPHAchievementsManager : MonoBehaviour {
 		}
 	}
 
-	private void AcomplishmentCheck_Jump(){
-		//Checking if conditions have been meet
-		if(plataformJumps ==  (int)PlataformJump03[1] && !IsCompleted(PlataformJump03)){
-			//Change the array data to informe that this achievement habe been completed
-			UpdatingCompletedAchievements(PlataformJump03);
-
-			//Renders on screen a message box annoucing the achievement have been completed
-			AchievementMsgBox((string)PlataformJump03[2]);
-		}
-
-		if(plataformJumps ==  (int)PlataformJump10[1] && !IsCompleted(PlataformJump10)){
-			//Change the array data to informe that this achievement habe been completed
-			UpdatingCompletedAchievements(PlataformJump10);
-
-			//Renders on screen a message box annoucing the achievement have been completed
-			AchievementMsgBox((string)PlataformJump10[2]);
+	private void AcomplishmentCheck(ArrayList achievement, float counter){
+		//Checking if conditions have been meet to complete achievement
+		if(counter == (int)achievement[1] && !IsCompleted(achievement)){
+			UpdatingCompletedAchievements(achievement);
+			AchievementMsgBox((string)achievement[2]);
 		}
 	}
 
 	//private void AcomplishmentCheck_PowerUp()
-
-	//private void AcomplishmentCheck_Matches()
 
 	private bool IsCompleted(ArrayList Achievement){
 		//Return false if achievement is no completed and true otherwise
