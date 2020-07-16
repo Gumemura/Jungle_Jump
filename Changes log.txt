@@ -6,9 +6,13 @@ IPHGameController
 	initialization of unity ads droped to the last execution of Start() function because it's was preventing the function to be called on mobile devices
 
 - Persistent sound
+A txt file is created to stores user's input. When game is launched, its contents is read and designated to proper configuration 
+
 New class: IPHCreateTxt
 	Creates a txt files that will store all persistent data
-	
-IPHToggleSound
-	created a new function SoundReadTxt that reads the txt configuration's file and set the conditions of sounds and music
-	created a new function WriteTxtSound that writes on the txt configuration's file
+	also stores achievements conditions
+
+New class: IPHTxtManipulation
+	have two functions: one reads a txt, another one writes on it
+	planned to be globaly used
+

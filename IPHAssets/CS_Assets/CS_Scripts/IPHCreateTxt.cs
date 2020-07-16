@@ -29,12 +29,13 @@ public class IPHCreateTxt : MonoBehaviour {
 		// Each initials on the txt stands for some game feature, as below:
 		// snd: sound (0 off; 1 on)
 		// msc: music (0 off; 1 on)
+
 		// s3p: jump 3 plataforms ('saltar 3 plataformas'); counter
 		// s10: jump 10 plataforms ('saltar 10 plataformas'); counter
 		// c2p: collect 2 power-ups; counter
 		// c5p: collect 5 power-ups; counter
 		// j2p: play two matches ('jogar duas partidas'); counter
-		// cdo: unlock rabbit ('desbloquear coelinho'); true/false
+		// dco: unlock rabbit ('desbloquear coelinho'); true/false
 		// dga: unlock cat ('debloquear gatinho'); true/false
 		// dca: unlock cod ('debloquear cachorrinho'); true/false
 		// dpo: unlock pig ('debloquear porquinho'); true/false

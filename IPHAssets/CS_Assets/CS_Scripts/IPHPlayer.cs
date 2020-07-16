@@ -11,6 +11,9 @@ namespace InfiniteHopper
 	{
 		internal Transform thisTransform;
 		internal GameObject gameController;
+
+		//Text manipulator
+		public Transform TxtManipulator;
 		
 		//How fast the player's jump power increases when we are holding the jump button
 		public float jumpChargeSpeed = 30;
@@ -257,7 +260,6 @@ namespace InfiniteHopper
 		//This function runs when the player succesfully lands on a column
 		void  PlayerLanded()
 		{
-			print("eba");
 			isLanded = true;
 			
 			//Play the landing animation

@@ -25,9 +25,10 @@ public class IPHTxtManipulation : MonoBehaviour {
 	public float ReadTxt(string LineTxt){
 		//Reads the configuration txt and returns the estate of settings
 
+
 		foreach (string line in lines){
 			if (line.Substring(0, 3) == LineTxt){
-				return float.Parse(line[line.Length - 1].ToString());
+				return float.Parse(line.Substring(4, line.Length - 4).ToString());
 			}
 		}
 		return 1;
@@ -45,5 +46,4 @@ public class IPHTxtManipulation : MonoBehaviour {
 			}
 		}	
 	}
-	
 }
