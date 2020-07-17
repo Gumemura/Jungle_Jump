@@ -63,16 +63,6 @@ public class IPHAchievementsManager : MonoBehaviour {
 	//List with all achievements
 	List<ArrayList> AllAchievements = new List<ArrayList>();
 
- 
-	// int PlataformJump;
-	// int ColetedPowerUp;
-	// int Matches;
-	// bool RabbitUnlocked;
-	// bool CatUnlocked;
-	// bool DogUnlocked;
-	// bool PigUnlocked;
-	// bool PandaUnlocked;
-
 	// Use this for initialization
 	void Start () {
 		//Updating infos from txt
@@ -160,7 +150,7 @@ public class IPHAchievementsManager : MonoBehaviour {
 				}
 				break;
 			case "tkn":
-				if(collectedPower < maxPowers){
+				if(tokens < maxTokens){
 					TextManipulator.GetComponent<IPHTxtManipulation>().WriteTxt("tkn", ++tokens);
 					AcomplishmentCheck(RabbitUnlocked, tokens);
 					AcomplishmentCheck(CatUnlocked, tokens);
@@ -209,8 +199,6 @@ public class IPHAchievementsManager : MonoBehaviour {
 		if(notificationSound){
 			soundSource.GetComponent<AudioSource>().PlayOneShot(notificationSound);
 		}
-
-
 	}
 
 	private int IdenfityIndex(string AchievementCode){
