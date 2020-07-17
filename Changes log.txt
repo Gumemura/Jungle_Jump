@@ -21,4 +21,11 @@ New class: IPHAchievementsManager
 	its manage the Achievements
 	stores data in persistent form, trought txt (same used to store sound configurations)
 
+Classes existentes alteradas:
+	IPHPlayer
+	IPHItens
 
+	Em ambas foram inseridas funcoes que registram acontecimentos relevantes para os achievements
+
+- LootBox
+Nova classe: 

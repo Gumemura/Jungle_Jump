@@ -217,7 +217,7 @@ public class IPHAchievementsManager : MonoBehaviour {
 		//Return the index of the Achievement we want to modify
 		int counter = 0;
 		foreach (ArrayList achievement in AllAchievements){
-			if(achievement[0] == AchievementCode){
+			if((string)achievement[0] == AchievementCode){
 				return counter;
 			}
 			counter++;
