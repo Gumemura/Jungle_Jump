@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,7 +19,7 @@ public class IPHTimeTracker : MonoBehaviour {
 	//We will convert all the time to seconds and store it in this varibale. We will procedure this will because its easier to manipulate time when working 
 	//with a single dimension
 	[HideInInspector]
-	public static int timeTotal;
+	public int timeTotal;
 
 	//Here the operador can change the countdown duration
 	//There is a limit to avoid non-conventional countdowns, like 70 minutes
@@ -32,8 +33,8 @@ public class IPHTimeTracker : MonoBehaviour {
 	public int seconds;
 
 	//Booleans that will inform if the time format must be 00:00:00 (h:m:s), 00:00 (m:s) or just 00 (s)
-	private bool insertHour;
-	private bool insertMinutes;
+	private static bool insertHour;
+	private static bool insertMinutes;
 
 	//The time this instance of the time manager has been in the game
 	internal float instanceTime = 0;
@@ -59,32 +60,47 @@ public class IPHTimeTracker : MonoBehaviour {
 		//Don't destroy this object when loading a new scene
 		DontDestroyOnLoad(transform.gameObject);
 
+		//Finding txtmanipulator
 		txtManipulator = GameObject.Find("TxtManipulator").transform;
-		
+
+		timeTotal = (int)txtManipulator.GetComponent<IPHTxtManipulation>().ReadTxt("rmn") - CaculateRemainingTime();
+
+		//Converting countdown to seconds and decreasing it
 		StartCoundownTimer();
+
+		//Modifying timeTotal accordingly to the txt
+		//Will be based on the diference between the horary aplication was last quit and the horary its opened
+
 	}
 	 
 	void StartCoundownTimer(){
 		//Converting everything to seconds
 		//Why are we adding 1? Lets supose the timer is 2 minutes. Without the plus one the timer would start at 1:59, due to 
 		//the comand "timeTotal -= 1" on UpdateTimer function
-		timeTotal = (hours * 3600) + (minutes * 60) + seconds + 1; 
 
-		//Checking which dimension will be displayed on the timer
-		insertHour = (hours > 0);
-		insertMinutes = (minutes > 0 || hours > 0);
+		//CaculateRemainingTime(): Modifying timeTotal accordingly to the txt
+		//Will be based on the diference between the horary aplication was last quit and the horary its opened
 
-		//Updating timer for each second
-		InvokeRepeating("UpdateTimer", 0.0f, 1.0f);
+		if(timeTotal > 0){
+			//Checking which dimension will be displayed on the timer
+			insertHour = (hours > 0);
+			insertMinutes = (minutes > 0 || hours > 0);
+
+			//Updating timer for each second
+			InvokeRepeating("UpdateTimer", 0.0f, 1.0f);	
+		}else{
+			//Just in case timeTotal is negative
+			timeTotal = 0;
+		}
 	}
 	 
-	void UpdateTimer(){
+	public void UpdateTimer(){
 		if(timeTotal > 0){
 			//Updating the time. This is why why are adding 1 on timetotal
 			timeTotal -= 1;
 		}else{
 			//If timeTotal is 0, its time to stop!
-			CancelInvoke();
+			CancelInvoke("UpdateTimer");
 		}
 
 		//Clearing the string
@@ -105,24 +121,51 @@ public class IPHTimeTracker : MonoBehaviour {
 
 	//Static methods thats will return data calculate by this class
 
-	//This will be used as a parameter for IPHLootBox class
-	public static int GetTotalTime(){
-		return timeTotal;
-	}
-
 	//And this will provide to IPHCountdownText the new text that should be displayed
 	public static string GetStringTime(){
 		return timerText;
 	}
 
-	void OnApplicationQuit(){
-		Debug.Log("Hour: " + System.DateTime.Now.Hour);
-		Debug.Log("Minutes: " + System.DateTime.Now.Minute);
-		Debug.Log("Seconds: " + System.DateTime.Now.Second);
+	public void SetNewCountdown(){
+		timeTotal = (hours * 3600) + (minutes * 60) + seconds + 1; 
+		StartCoundownTimer();
+	}
 
+	void OnApplicationQuit(){
+		//Storing time information when closing so we will be able to calculate remaining time for countdown when the app starts again
+
+		//Storing remaining time
 		txtManipulator.GetComponent<IPHTxtManipulation>().WriteTxt("rmn", timeTotal);
+
+		//Storing date and time so we will be able to compare it to starting app's date
 		txtManipulator.GetComponent<IPHTxtManipulation>().WriteTxt("clh", System.DateTime.Now.Hour);
 		txtManipulator.GetComponent<IPHTxtManipulation>().WriteTxt("clm", System.DateTime.Now.Minute);
 		txtManipulator.GetComponent<IPHTxtManipulation>().WriteTxt("cls", System.DateTime.Now.Second);
+
+		txtManipulator.GetComponent<IPHTxtManipulation>().WriteTxt("cld", System.DateTime.Now.Day);
+		txtManipulator.GetComponent<IPHTxtManipulation>().WriteTxt("cln", System.DateTime.Now.Month);
+		txtManipulator.GetComponent<IPHTxtManipulation>().WriteTxt("cly", System.DateTime.Now.Year);
+	}
+
+	int CaculateRemainingTime(){
+		//If month or year is diferent, or the game is being played after two days of last close, the countdown will be finished for sure as long as
+		//the maximum countdown is 24 hours
+		if(txtManipulator.GetComponent<IPHTxtManipulation>().ReadTxt("cln") != System.DateTime.Now.Month || 
+			txtManipulator.GetComponent<IPHTxtManipulation>().ReadTxt("cly") != System.DateTime.Now.Year ||
+			txtManipulator.GetComponent<IPHTxtManipulation>().ReadTxt("cld") + 2 <=  System.DateTime.Now.Day){
+			print("N joga faz tempo");
+			return 24 * 3600;
+		}else{
+			//Creating datetime with last closing app datae
+			var closingAppDate = new DateTime((int)txtManipulator.GetComponent<IPHTxtManipulation>().ReadTxt("cly"),
+											  (int)txtManipulator.GetComponent<IPHTxtManipulation>().ReadTxt("cln"),
+											  (int)txtManipulator.GetComponent<IPHTxtManipulation>().ReadTxt("cld"),
+											  (int)txtManipulator.GetComponent<IPHTxtManipulation>().ReadTxt("clh"),
+											  (int)txtManipulator.GetComponent<IPHTxtManipulation>().ReadTxt("clm"),
+											  (int)txtManipulator.GetComponent<IPHTxtManipulation>().ReadTxt("cls"));
+			//Else, the player will be playing it at a maximum of two days from the last quit
+			//So we can just return diference between two dates in seconds
+			return (int)Mathf.Floor((float)(System.DateTime.Now - closingAppDate).TotalSeconds);
+		}
 	}
 }

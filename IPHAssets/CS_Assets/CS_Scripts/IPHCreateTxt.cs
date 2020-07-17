@@ -23,7 +23,7 @@ public class IPHCreateTxt : MonoBehaviour {
 		//Verifying if .txt already exists
 		if(!File.Exists(path)){
 			File.WriteAllText(path, 
-				"snd 1\nmsc 1\n--achievements\ns3p 0\ns10 0\nc2p 0\nc5p 0\nj2p 0\ndco 0\ndga 0\ndca 0\ndpo 0\ndpa 0\n--counters\njmp 0\npwr 0\nmat 0\ntkn 0\n--time\nrmn 0\nclh 0\nclm 0\ncls 0");
+				"snd 1\nmsc 1\n--achievements\ns3p 0\ns10 0\nc2p 0\nc5p 0\nj2p 0\ndco 0\ndga 0\ndca 0\ndpo 0\ndpa 0\n--counters\njmp 0\npwr 0\nmat 0\ntkn 0\n--time\nrmn 0\nclh 0\nclm 0\ncls 0\ncld 0\ncln 0\ncly 0");
 		}
 		/// <summary>
 		// The first number indicates if the achievements have been acomplished. Its not useful for configuration
@@ -51,6 +51,9 @@ public class IPHCreateTxt : MonoBehaviour {
 		//clh: closing hour
 		//clm: closing minute
 		//cls: closing second
+		//cld: closing day
+		//cln: closing month
+		//cly: closing year
 		/// </summary>
 	}
 }
