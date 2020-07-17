@@ -15,7 +15,7 @@ namespace InfiniteHopper
 		private string SoundTarget;
 
 		//The object that will provide the function to read and write on txt 
-		public Transform TextManipulator;
+		private Transform textManipulator;
 
 		//The tag of the sound object
 		public string soundObjectTag = "GameController";
@@ -47,7 +47,8 @@ namespace InfiniteHopper
 				SoundTarget = "msc"; //Music
 			}
 
-			currentState = TextManipulator.GetComponent<IPHTxtManipulation>().ReadTxt(SoundTarget);
+			textManipulator = GameObject.Find("TxtManipulator").transform;
+			currentState = textManipulator.GetComponent<IPHTxtManipulation>().ReadTxt(SoundTarget);
 
 			SetSound();
 		}
@@ -90,7 +91,7 @@ namespace InfiniteHopper
 			}
 
 			//Writing on the txt
-			TextManipulator.GetComponent<IPHTxtManipulation>().WriteTxt(SoundTarget, currentState);
+			textManipulator.GetComponent<IPHTxtManipulation>().WriteTxt(SoundTarget, currentState);
 
 			SetSound();
 		}

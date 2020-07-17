@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 //This class will manage all achievements and keep record of progress to conclusion
 public class IPHAchievementsManager : MonoBehaviour {
 	//The object that will provide the function to read and write on txt 
-	public Transform TextManipulator;
+	private Transform textManipulator;
 
 	//Record the moment the notification will start
 	private float startNotification;
@@ -66,10 +66,12 @@ public class IPHAchievementsManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		//Updating infos from txt
-		GetTxtValues();
 
 		soundSource = GameObject.FindGameObjectWithTag("GameController");
+		textManipulator = GameObject.Find("TxtManipulator").transform;
 
+		GetTxtValues();
+		
 		//Checking if the scene loaded is the game scene so we can keep track of the matches played achievement
 		if(SceneManager.GetActiveScene().name == "CS_Game"){
 			RaiseCounter("mat");
@@ -103,22 +105,22 @@ public class IPHAchievementsManager : MonoBehaviour {
 
 		//Update the progress of all achievements from the txt
 		foreach (ArrayList achievement in AllAchievements){
-			achievement[3] = TextManipulator.GetComponent<IPHTxtManipulation>().ReadTxt((string)achievement[0]);
+			achievement[3] = textManipulator.GetComponent<IPHTxtManipulation>().ReadTxt((string)achievement[0]);
 		}
 
 		foreach (string code in actionCodes){
 			switch(code){
 				case "jmp":
-					plataformJumps = TextManipulator.GetComponent<IPHTxtManipulation>().ReadTxt(code);
+					plataformJumps = textManipulator.GetComponent<IPHTxtManipulation>().ReadTxt(code);
 					break;
 				case "pwr":
-					collectedPower = TextManipulator.GetComponent<IPHTxtManipulation>().ReadTxt(code);
+					collectedPower = textManipulator.GetComponent<IPHTxtManipulation>().ReadTxt(code);
 					break;
 				case "mat":
-					matches = TextManipulator.GetComponent<IPHTxtManipulation>().ReadTxt(code);
+					matches = textManipulator.GetComponent<IPHTxtManipulation>().ReadTxt(code);
 					break;
 				case "tkn":
-					tokens = TextManipulator.GetComponent<IPHTxtManipulation>().ReadTxt(code);
+					tokens = textManipulator.GetComponent<IPHTxtManipulation>().ReadTxt(code);
 					break;
 			}
 		}
@@ -130,14 +132,14 @@ public class IPHAchievementsManager : MonoBehaviour {
 			case "jmp":
 				//Is possible to remove this if and keep track of all progrees play is making
 				if(plataformJumps < maxJumps){
-					TextManipulator.GetComponent<IPHTxtManipulation>().WriteTxt("jmp", ++plataformJumps);
+					textManipulator.GetComponent<IPHTxtManipulation>().WriteTxt("jmp", ++plataformJumps);
 					AcomplishmentCheck(PlataformJump03, plataformJumps);
 					AcomplishmentCheck(PlataformJump10, plataformJumps);
 				}
 				break;
 			case "pwr":
 				if(collectedPower < maxPowers){
-					TextManipulator.GetComponent<IPHTxtManipulation>().WriteTxt("pwr", ++collectedPower);
+					textManipulator.GetComponent<IPHTxtManipulation>().WriteTxt("pwr", ++collectedPower);
 					AcomplishmentCheck(ColletedPowerUp2, collectedPower);
 					AcomplishmentCheck(ColletedPowerUp5, collectedPower);
 
@@ -145,13 +147,13 @@ public class IPHAchievementsManager : MonoBehaviour {
 				break;
 			case "mat":
 				if(matches < maxMatches){
-					TextManipulator.GetComponent<IPHTxtManipulation>().WriteTxt("mat", ++matches);
+					textManipulator.GetComponent<IPHTxtManipulation>().WriteTxt("mat", ++matches);
 					AcomplishmentCheck(Play2Matches, matches);
 				}
 				break;
 			case "tkn":
 				if(tokens < maxTokens){
-					TextManipulator.GetComponent<IPHTxtManipulation>().WriteTxt("tkn", ++tokens);
+					textManipulator.GetComponent<IPHTxtManipulation>().WriteTxt("tkn", ++tokens);
 					AcomplishmentCheck(RabbitUnlocked, tokens);
 					AcomplishmentCheck(CatUnlocked, tokens);
 					AcomplishmentCheck(DogUnlocked, tokens);
@@ -180,7 +182,7 @@ public class IPHAchievementsManager : MonoBehaviour {
 	private void UpdatingCompletedAchievements(ArrayList Achievement){
 		//Changin the array item to indicate the achievement have been completed
 		Achievement[3] = 1;
-		TextManipulator.GetComponent<IPHTxtManipulation>().WriteTxt((string)Achievement[0], 1);
+		textManipulator.GetComponent<IPHTxtManipulation>().WriteTxt((string)Achievement[0], 1);
 
 		//Changin the txt to perpetuate the data that this achievement have been completed
 		AllAchievements[IdenfityIndex((string)Achievement[0])] = Achievement;

@@ -7,6 +7,8 @@ public class IPHTimeTracker : MonoBehaviour {
 	//This class could be a child of LootBox button as its data is used by it
 	//but we ketp it separable because it will not be destroyed when loading game scene so we can keep track of time when user is playing
 
+	//Will provide txt manipulation functions
+	private Transform txtManipulator;
 
 	//The converted time countdown to string
 	//It will be send to class IPHCountdownText so it will be able to update its display text
@@ -36,17 +38,15 @@ public class IPHTimeTracker : MonoBehaviour {
 	//The time this instance of the time manager has been in the game
 	internal float instanceTime = 0;
 	
-	void  Awake()
-	{
+	void Awake(){
 		//Imported fom IPH Global Music :)
 
-		//Find all the music objects in the scene
+		//Find all the time objects in the scene
 		GameObject[] timeObjects = GameObject.FindGameObjectsWithTag("TimeManager");
 		
 		//Keep only the time object which has been in the game for more than 0 seconds
-		if ( timeObjects.Length > 1 )
-		{
-			foreach( var timeObject in timeObjects )
+		if(timeObjects.Length > 1){
+			foreach(var timeObject in timeObjects)
 			{
 				if(timeObject.GetComponent<IPHTimeTracker>().instanceTime <= 0 ){
 					Destroy(gameObject);
@@ -55,12 +55,11 @@ public class IPHTimeTracker : MonoBehaviour {
 		}
 	}
 
-
-
-
 	void Start (){
 		//Don't destroy this object when loading a new scene
 		DontDestroyOnLoad(transform.gameObject);
+
+		txtManipulator = GameObject.Find("TxtManipulator").transform;
 		
 		StartCoundownTimer();
 	}
@@ -114,5 +113,16 @@ public class IPHTimeTracker : MonoBehaviour {
 	//And this will provide to IPHCountdownText the new text that should be displayed
 	public static string GetStringTime(){
 		return timerText;
+	}
+
+	void OnApplicationQuit(){
+		Debug.Log("Hour: " + System.DateTime.Now.Hour);
+		Debug.Log("Minutes: " + System.DateTime.Now.Minute);
+		Debug.Log("Seconds: " + System.DateTime.Now.Second);
+
+		txtManipulator.GetComponent<IPHTxtManipulation>().WriteTxt("rmn", timeTotal);
+		txtManipulator.GetComponent<IPHTxtManipulation>().WriteTxt("clh", System.DateTime.Now.Hour);
+		txtManipulator.GetComponent<IPHTxtManipulation>().WriteTxt("clm", System.DateTime.Now.Minute);
+		txtManipulator.GetComponent<IPHTxtManipulation>().WriteTxt("cls", System.DateTime.Now.Second);
 	}
 }
