@@ -12,16 +12,28 @@ public class IPHLootBox : MonoBehaviour {
 		
 	}
 	
-	// Update is called once per frame
+	//Update is called once per frame
 	void Update () {
-
+		ChangeButtonText_Expand();
 	}
 
 	public void OnClick(){
 		//Checking if still in countdown by verifying if timeTotal (from IPHCountdown) is greater then 0
-		if(transform.Find("TextCountdow").GetComponent<IPHCountdown>().timeTotal > 0){
+		// if(transform.Find("TimeManager").GetComponent<IPHTimeTracker>().timeTotal > 0){
+
+		if(IPHTimeTracker.GetTotalTime() > 0){
 			//if still on countdown, feedback indicating it
-			transform.Find("TextCountdow").GetComponent<IPHCountdown>().InvokeShake();
+			transform.Find("TextCountdow").GetComponent<IPHCountdownText>().InvokeShake();
+		}else{
+			print("aperto");
+		}
+	}
+
+	private void ChangeButtonText_Expand(){
+		//if(transform.Find("TimeManager").GetComponent<IPHTimeTracker>().timeTotal <= 0){
+		if(IPHTimeTracker.GetTotalTime() <= 0){
+			transform.Find("TextCountdow").gameObject.SetActive(false);
+			transform.Find("TextRewards").gameObject.SetActive(true);
 		}
 	}
 }

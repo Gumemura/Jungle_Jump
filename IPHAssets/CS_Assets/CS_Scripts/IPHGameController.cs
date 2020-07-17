@@ -520,8 +520,7 @@ namespace InfiniteHopper
 
 
 				// Show bonus button
-
-				bonusCanvas.gameObject.SetActive(Advertisement.isReady());
+				bonusCanvas.gameObject.SetActive(Advertisement.IsReady());
 
 			}
 		}
