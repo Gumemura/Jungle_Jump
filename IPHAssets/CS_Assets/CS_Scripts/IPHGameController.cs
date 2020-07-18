@@ -207,9 +207,9 @@ namespace InfiniteHopper
 
 			//Initialize Unity Ads
 			#if UNITY_ANDROID
-			Advertisement.Initialize ("44169");
+				Advertisement.Initialize ("44169");
 			#elif UNITY_IPHONE
-			Advertisement.Initialize ("44172");
+				Advertisement.Initialize ("44172");
 			#endif
 		}
 

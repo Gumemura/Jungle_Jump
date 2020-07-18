@@ -42,12 +42,10 @@ public class IPHTxtManipulation : MonoBehaviour {
 
 		//Creating an array ofrom the lines of txt
 		lines = File.ReadAllLines(path);
-
 	}
 
 	public float ReadTxt(string LineTxt){
 		//Reads the configuration txt and returns the estate of settings
-
 		foreach (string line in lines){
 			if (line.Substring(0, 3) == LineTxt){
 				return float.Parse(line.Substring(4, line.Length - 4).ToString());

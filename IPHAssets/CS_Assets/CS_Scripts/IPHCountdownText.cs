@@ -8,7 +8,7 @@ public class IPHCountdownText : MonoBehaviour {
 	//Stores initial  font sizr
 	internal int initialFontSize;
 
-	//How much will the font expand to give visual feedbak
+	//The velocity of font size grow
 	public int fontGrow = 1;
 
 	//Limit size font 
@@ -17,10 +17,11 @@ public class IPHCountdownText : MonoBehaviour {
 	//counts how many times the font has grow
 	internal int growCount = 0;
 
-	//Limit of cycle of grow
+	//Limit of cycle of grow. In other word, how many times the text will blink (technically, it will not blink, but will have a similiar visual effect)
 	public int growLimit = 5;
 
 	void Start(){
+		//Recording the initial font size
 		initialFontSize = transform.GetComponent<Text>().fontSize;
 	}
 
@@ -29,19 +30,19 @@ public class IPHCountdownText : MonoBehaviour {
 	}
 
 	public void InvokeShake(){
-		//The only purpose  of this function is to invoke repeat shaek()
+		//The only purpose  of this function is to invoke repeatedly shake function()
 		
 		InvokeRepeating("Shake", 0.0f, 0.01f);
 	}
 
 	public void Shake(){
 		//This function will provide a visual feedback to player by blinking the countdown text
-		//Its made by raising and lowering the font
+		//The blinking is made by raising and lowering the font
 
 		//Raising the font
 		transform.GetComponent<Text>().fontSize += fontGrow;
 
-		//If its going too big or too low, its time to invert 
+		//If its going too big or too low, its time to invert. And we do it by multipling fontGrow by -1
 		//fontGrow > 0 goes for growing
 		//fontGrow < 0 goes for lowering
 		if(transform.GetComponent<Text>().fontSize >= fontLimit || transform.GetComponent<Text>().fontSize <= initialFontSize){

@@ -1,5 +1,11 @@
 Guilherme Umemura
 
+- Coisas que pdoeriam ter sido melhores:
+- na classe IPHTxtManipulator, tornar as funções estáticas
+- Ao inves de sempre alterar tudo no txt, alterar variaveis, estoca-las num unico objeto e usar OnApplicationQuit() ou semelhante para registra-los de uma 
+unica vez no txt
+
+
 Changes log
 
 IPHGameController

@@ -12,7 +12,7 @@ namespace InfiniteHopper
 	public class IPHToggleSound:MonoBehaviour
 	{
 		//will set which sound configuration will be changed (sound or music)
-		private string SoundTarget;
+		private string soundTarget;
 
 		//The object that will provide the function to read and write on txt 
 		private Transform textManipulator;
@@ -42,13 +42,14 @@ namespace InfiniteHopper
 		
 			//Reading the configuration's txt and establishing the configurations accordingly to the file
 			if(soundObjectTag == "GameController"){
-				SoundTarget = "snd"; //Sound
+				soundTarget = "snd"; //Sound
 			}else{
-				SoundTarget = "msc"; //Music
+				soundTarget = "msc"; //Music
 			}
 
 			textManipulator = GameObject.Find("TxtManipulator").transform;
-			currentState = textManipulator.GetComponent<IPHTxtManipulation>().ReadTxt(SoundTarget);
+
+			currentState = textManipulator.GetComponent<IPHTxtManipulation>().ReadTxt(soundTarget);
 
 			SetSound();
 		}
@@ -85,13 +86,13 @@ namespace InfiniteHopper
 
 			//determining which souns will be changed
 			if(soundObjectTag == "GameController"){
-				SoundTarget = "snd"; //Sound
+				soundTarget = "snd"; //Sound
 			}else{
-				SoundTarget = "msc"; //Music
+				soundTarget = "msc"; //Music
 			}
 
 			//Writing on the txt
-			textManipulator.GetComponent<IPHTxtManipulation>().WriteTxt(SoundTarget, currentState);
+			textManipulator.GetComponent<IPHTxtManipulation>().WriteTxt(soundTarget, currentState);
 
 			SetSound();
 		}

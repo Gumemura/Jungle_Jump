@@ -16,22 +16,23 @@ public class IPHLootBox : MonoBehaviour {
 	
 	//Update is called once per frame
 	void Update () {
-		ChangeButtonText();
+		// This function will change the text of the button when timer reach 0
+		CheckCountdown();
 	}
 
 	public void OnClick(){
-		//Checking if still in countdown by verifying if timeTotal (from IPHCountdown) is greater then 0
-		// if(transform.Find("TimeManager").GetComponent<IPHTimeTracker>().timeTotal > 0){
+		//Function called when lootbox button is clicked
 
+		//Checking if still in countdown by verifying if timeTotal (from IPHCountdown) is greater then 0
 		if(timeTracker.GetComponent<IPHTimeTracker>().timeTotal > 0){
-			//if still on countdown, feedback indicating it
+			//if still on countdown, visual feedback ("blink") indicating it
 			transform.Find("TextCountdow").GetComponent<IPHCountdownText>().InvokeShake();
 		}else{ 
 			timeTracker.GetComponent<IPHTimeTracker>().SetNewCountdown();
 		}
 	}
 
-	private void ChangeButtonText(){
+	private void CheckCountdown(){
 		transform.Find("TextCountdow").gameObject.SetActive(timeTracker.GetComponent<IPHTimeTracker>().timeTotal > 0);
 		transform.Find("TextRewards").gameObject.SetActive(timeTracker.GetComponent<IPHTimeTracker>().timeTotal <= 0);
 	}
