@@ -29,6 +29,12 @@ public class IPHTxtManipulation : MonoBehaviour {
 				}    
 			}
 		}
+		//establishing the path of configuration txt
+		//Usualy would be used Application.DataPath, but for mobile devices, Application.persistentDataPath works better because we may not have direct write access to the dataPath of the project
+		path = Application.persistentDataPath + "\\configLog.txt";
+
+		//Creating an array ofrom the lines of txt
+		lines = File.ReadAllLines(path);
 	}
 
 	// Use this for initialization
@@ -36,12 +42,6 @@ public class IPHTxtManipulation : MonoBehaviour {
 		//Making this persistent because will be used by objects in all scenes
 		DontDestroyOnLoad(transform.gameObject);
 
-		//establishing the path of configuration txt
-		//Usualy would be used Application.DataPath, but for mobile devices, Application.persistentDataPath works better because we may not have direct write access to the dataPath of the project
-		path = Application.persistentDataPath + "\\configLog.txt";
-
-		//Creating an array ofrom the lines of txt
-		lines = File.ReadAllLines(path);
 	}
 
 	public float ReadTxt(string LineTxt){
