@@ -195,7 +195,6 @@ public class IPHTimeTracker : MonoBehaviour {
 			CancelInvoke("UpdateTimer");
 		}
 	}
-
 	//reactivate the countdown. Acts like a Start() method
 	void OnApplicationFocus(bool isFocus){
 		if(isFocus){

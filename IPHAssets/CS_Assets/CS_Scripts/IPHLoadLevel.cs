@@ -47,11 +47,13 @@ namespace InfiniteHopper
 			
 		public void RestartLevelWithBonus()
 		{					
-			#if UNITY_5_3_OR_NEWER
 			SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-			#else
-			Application.LoadLevel(Application.loadedLevelName);
-			#endif
+
+			// #if UNITY_5_3_OR_NEWER
+			// SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+			// #else
+			// Application.LoadLevel(Application.loadedLevelName);
+			// #endif
 		}
 
 	}
