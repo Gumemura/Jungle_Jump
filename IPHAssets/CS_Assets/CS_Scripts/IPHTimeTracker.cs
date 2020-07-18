@@ -137,7 +137,7 @@ public class IPHTimeTracker : MonoBehaviour {
 			return 24 * 3600;
 		}else{
 			//Bringing txt info to object. Here we are creating a DateTime with year, month, day, hour, minute and second
-			time would be enought for us, but its not possible to create a DateTime with only time
+			//time would be enought for us, but its not possible to create a DateTime with only time
 			var closingAppDate = new DateTime((int)txtManipulator.GetComponent<IPHTxtManipulation>().ReadTxt("cly"),
 											  (int)txtManipulator.GetComponent<IPHTxtManipulation>().ReadTxt("cln"),
 											  (int)txtManipulator.GetComponent<IPHTxtManipulation>().ReadTxt("cld"),
