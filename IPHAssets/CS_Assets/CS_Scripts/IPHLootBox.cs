@@ -11,6 +11,7 @@ public class IPHLootBox : MonoBehaviour {
 	private float countHoldButton; //Will coun how long the button have been pressed
 	public float countIncrease; //How much the counter will increase
 	public float countLimit; // Limit to the counter
+	public Transform lootCanvas;
 
 
 	// Use this for initialization
@@ -22,15 +23,19 @@ public class IPHLootBox : MonoBehaviour {
 	void Update () {
 		// This function will change the text of the button when timer reach 0
 		CheckCountdown();
+
+		//Checking if the button was just pressed or holding
 		CheckHoldButton();
 
 	}
 
+	//Checking if the button was just pressed or holding
+	//This is done with Pointer_Down() and Pointer_Up()
 	private void CheckHoldButton(){
 		if(canCountHold){
 			countHoldButton += countIncrease * Time.deltaTime;
 			if(countHoldButton >= countLimit){
-				print("Abrir tabela de loot");
+				lootCanvas.gameObject.SetActive(true);
 				canCountHold = false;
 			}
 		}
@@ -54,11 +59,13 @@ public class IPHLootBox : MonoBehaviour {
 		transform.Find("TextRewards").gameObject.SetActive(timeTracker.GetComponent<IPHTimeTracker>().timeTotal <= 0);
 	}
 
-	public void testeDown(){
+	//Called when button is pressed
+	public void Pointer_Down(){
 		canCountHold = true;
 	}
 
-	public void testeUp(){
+	//Called when button is released
+	public void Pointer_Up(){
 		if(countHoldButton < countLimit){
 			OnClick();
 		}
