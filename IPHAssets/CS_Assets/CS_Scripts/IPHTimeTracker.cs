@@ -197,8 +197,7 @@ public class IPHTimeTracker : MonoBehaviour {
 	}
 	//reactivate the countdown. Acts like a Start() method
 	void OnApplicationFocus(bool isFocus){
-		if(isFocus){
-			print("sss");
+		if(isFocus){;
 			SetInitialCountdown();
 		}
 	}
