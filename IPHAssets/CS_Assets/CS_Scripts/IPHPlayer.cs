@@ -54,6 +54,7 @@ namespace InfiniteHopper
 		public AudioClip soundLand;
 		public AudioClip soundCrash;
 		public AudioClip soundPerfect;
+		public AudioClip soundDash;
 		public string soundSourceTag = "GameController";
 		internal GameObject soundSource;
 		
@@ -75,7 +76,14 @@ namespace InfiniteHopper
 		//Used on double jump. Allow the player to do a extra jump while on air (if playing with bunny)
 		//Its starting with a big value to prevent double jump when starting the game
 		private int doubleJumpCount = 2;
-		
+
+		//Dash velocity
+		public float dashVelocity = 10;
+
+		//Used to count dashes. Allow the player to do adash while on air (if playing with cat)
+		//Its starting with a big value to prevent dashin when starting the game
+		private int dashCounter = 2;
+
 		void  Start()
 		{
 			thisTransform = transform;
@@ -171,6 +179,15 @@ namespace InfiniteHopper
 		{
 			isDead = false;
 		}
+
+		//Dash, kitty ability
+		//the y on vector 2 (0.364) makes the direction of dash points up a little 
+		void Dash(){
+			soundSource.GetComponent<AudioSource>().PlayOneShot(soundDash);
+			thisTransform.GetComponent<Rigidbody2D>().velocity = new Vector2(1, 0.364f) * dashVelocity;
+			dashCounter++;
+		}
+
 		
 		//This function starts the jumping process, allowing the player to charge up the jump power as long as he is holding the jump button down
 		void  StartJump( bool playerAutoJump )
@@ -180,14 +197,17 @@ namespace InfiniteHopper
 				//Set the player auto jump state based on the GameController playerAutoJump value
 				autoJump = playerAutoJump;
 
+				if(thisTransform.gameObject.name == "PlayerKitty" && isLanded == false && dashCounter == 0)
+				{
+					Dash();
+				}
+
 				//You can only jump if you are on land
 				//Or if you are the rabbit and have made less or equal to two jump
 				if ( isLanded == true || (thisTransform.gameObject.name == "PlayerBunny" && doubleJumpCount <= 1) )
 				{	
 					startJump = true;
 
-
-					
 					//Reset the jump power
 					jumpPower = 0;
 					
@@ -281,7 +301,16 @@ namespace InfiniteHopper
 
 			isLanded = true;
 
-			doubleJumpCount = 0;
+			if(thisTransform.gameObject.name == "PlayerKitty")
+			{
+				//reducing velocity to zero to avoid sliding on plataform
+				thisTransform.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+				dashCounter = 0;
+			}else if(thisTransform.gameObject.name == "PlayerBunny")
+			{
+				doubleJumpCount = 0;
+			}
+
 			
 			//Play the landing animation
 			if ( GetComponent<Animation>() && animationLanded )
