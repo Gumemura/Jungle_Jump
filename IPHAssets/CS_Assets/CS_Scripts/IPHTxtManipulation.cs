@@ -11,25 +11,25 @@ public class IPHTxtManipulation : MonoBehaviour {
 	//All lines of configs txt
 	public static string[] lines;
 
-	//The time this instance of the txtmanipulator has been in the game
-	internal float instanceTime = 0;
+	// //The time this instance of the txtmanipulator has been in the game
+	// internal float instanceTime = 0;
 
-	void Awake(){
-		//Imported fom IPH Global Music :)
+	// void Awake(){
+	// 	//Imported fom IPH Global Music :)
 
-		//Find all the txtmanipulator objects in the scene
-		GameObject[] txtManipulators = GameObject.FindGameObjectsWithTag("TxtManipulation");
+	// 	//Find all the txtmanipulator objects in the scene
+	// 	GameObject[] txtManipulators = GameObject.FindGameObjectsWithTag("TxtManipulation");
 		
-		//Keep only the txtmanipulator object which has been in the game for more than 0 seconds
-		if(txtManipulators.Length > 1){
-			foreach(var txtManipulator in txtManipulators)
-			{
-				if(txtManipulator.GetComponent<IPHTxtManipulation>().instanceTime <= 0 ){
-					Destroy(gameObject);
-				}    
-			}
-		}
-	}
+	// 	//Keep only the txtmanipulator object which has been in the game for more than 0 seconds
+	// 	if(txtManipulators.Length > 1){
+	// 		foreach(var txtManipulator in txtManipulators)
+	// 		{
+	// 			if(txtManipulator.GetComponent<IPHTxtManipulation>().instanceTime <= 0 ){
+	// 				Destroy(gameObject);
+	// 			}    
+	// 		}
+	// 	}
+	// }
 
 	// Use this for initialization
 	void Start () {
@@ -40,7 +40,7 @@ public class IPHTxtManipulation : MonoBehaviour {
 		//Creating an array ofrom the lines of txt
 		lines = File.ReadAllLines(path);
 		//Making this persistent because will be used by objects in all scenes
-		DontDestroyOnLoad(transform.gameObject);
+		//DontDestroyOnLoad(transform.gameObject);
 
 	}
 

@@ -99,22 +99,9 @@ namespace InfiniteHopper
 			//Assign the sound source for easier access
 			if ( GameObject.FindGameObjectWithTag(soundSourceTag) )    soundSource = GameObject.FindGameObjectWithTag(soundSourceTag);
 		}
-
-		// void OnCollisionEnter2D(){
-		// 	print("OnCollisionEnter");
-		// 	PlayerLanded();
-		// }
 		
 		void  Update()
 		{
-					// startJump = false;
-					// isJumping = true;
-					// isLanded = false;
-					// isFalling = false;
-			if(isLanded){
-				print("landed");
-			}
-
 			if ( isDead == false )
 			{
 				//If we are starting to jump, charge up the jump power as long as we are holding the jump button down
