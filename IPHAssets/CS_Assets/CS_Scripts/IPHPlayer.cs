@@ -71,6 +71,10 @@ namespace InfiniteHopper
 
 		// Is the player dead?
 		internal bool isDead = false;
+
+		//Used on double jump. Allow the player to do a extra jump while on air (if playing with bunny)
+		//Its starting with a big value to prevent double jump when starting the game
+		private int doubleJumpCount = 2;
 		
 		void  Start()
 		{
@@ -177,9 +181,12 @@ namespace InfiniteHopper
 				autoJump = playerAutoJump;
 
 				//You can only jump if you are on land
-				if ( isLanded == true )
+				//Or if you are the rabbit and have made less or equal to two jump
+				if ( isLanded == true || (thisTransform.gameObject.name == "PlayerBunny" && doubleJumpCount <= 1) )
 				{	
 					startJump = true;
+
+
 					
 					//Reset the jump power
 					jumpPower = 0;
@@ -217,8 +224,11 @@ namespace InfiniteHopper
 			if ( isDead == false )
 			{
 				//You can only jump if you are on land, and you already charged up the jump power ( jump start )
-				if ( isLanded == true && startJump == true )
+				//or if u are the bunny and are giving a second jump
+				if ( startJump == true && (isLanded == true  || (thisTransform.gameObject.name == "PlayerBunny" && doubleJumpCount <= 1) ) )
 				{
+					doubleJumpCount++;
+
 					thisTransform.parent = null;
 
 					startJump = false;
@@ -270,6 +280,8 @@ namespace InfiniteHopper
 			}
 
 			isLanded = true;
+
+			doubleJumpCount = 0;
 			
 			//Play the landing animation
 			if ( GetComponent<Animation>() && animationLanded )
