@@ -158,6 +158,7 @@ namespace InfiniteHopper
             totalPowerups = 0;
 		
 			//Set the current player object
+			currentPlayer = (int)GameObject.Find("TxtManipulator").transform.GetComponent<IPHTxtManipulation>().ReadTxt("act");
 			SetPlayer (currentPlayer);
 		
 			//If the player object is not already assigned, Assign it from the "Player" tag

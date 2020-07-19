@@ -4,6 +4,7 @@ Guilherme Umemura
 - na classe IPHTxtManipulator, tornar as funções estáticas
 - Ao inves de sempre alterar tudo no txt, alterar variaveis, estoca-las num unico objeto e usar OnApplicationQuit() ou semelhante para registra-los de uma 
 unica vez no txt
+- usar PlayerPrefs API para transitar variaveis entre as cenas
 
 
 Changes log

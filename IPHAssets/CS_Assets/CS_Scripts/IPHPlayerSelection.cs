@@ -15,6 +15,10 @@ namespace InfiniteHopper
 
 		//The currently selected player
 		public int currentPlayer = 0;
+
+		//For txt manipulation functions
+		[HideInInspector]
+		public Transform txtManipulator;
 			
 		
 		//The number of tokens we have
@@ -28,6 +32,8 @@ namespace InfiniteHopper
 		
 		void  Start()
 		{
+			txtManipulator = GameObject.Find("TxtManipulator").transform;
+			tokens = txtManipulator.GetComponent<IPHTxtManipulation>().ReadTxt("tkn");
 			SetPlayer(currentPlayer);
 		}
 		
@@ -46,6 +52,8 @@ namespace InfiniteHopper
 		//This function activates the selected player, while deactivating all the others
 		void  SetPlayer(int playerNumber)
 		{
+			//Writing on txt active 
+			txtManipulator.GetComponent<IPHTxtManipulation>().WriteTxt("act", playerNumber);
 			//Go through all the players, and hide each one except the current player
 			for( index = 0; index < playerList.Length; index++ )
 			{
