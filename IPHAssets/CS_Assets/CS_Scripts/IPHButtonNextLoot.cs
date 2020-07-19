@@ -59,6 +59,7 @@ public class IPHButtonNextLoot : MonoBehaviour {
 		itensOdd.GetComponent<Text>().text = "";
 		itensRarity.GetComponent<Text>().text = "";
 
+		//TO DO: implement functionaly to accept names with spaces
 		for(int i = num; i < itensDisplayed + num; i++){
 			if(i < lines.Length){
 				string[] itenAllInfos = lines[i].Split(' ');
