@@ -134,7 +134,6 @@ namespace InfiniteHopper
 		internal int currentPowerUpStreak = 0;
 		internal int longestPowerUpStreak = 0;
 
-
 		/// <summary>
 		/// Start is only called once in the lifetime of the behaviour.
 		/// The difference between Awake and Start is that Start is only called if the script instance is enabled.

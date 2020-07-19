@@ -46,7 +46,7 @@ namespace InfiniteHopper
 		void  OnCollisionEnter2D(Collision2D coll)
 		{
 			//If the player lands on top of this column, and the column hasn't been landed on yet, you can land on it
-			if ( coll.gameObject.tag == "Player" && coll.transform.position.y > thisTransform.position.y )    
+			if ( coll.gameObject.tag == "Player" && coll.transform.position.y +.5f > thisTransform.position.y)    
 			{
 				//The player has landed
 				coll.gameObject.SendMessage("PlayerLanded");

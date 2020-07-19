@@ -15,7 +15,7 @@ namespace InfiniteHopper
 		//The achievemente manager that will provide us the functions to update data
 		public Transform AchievementeManager;
 
-		//counts the time player hits a plataform. it avoids the first hit with the plataform to be coutned
+		//counts the time player hits a plataform for achievements purpose. it avoids counting the first plataform
 		internal int hitCounter = 0;
 		
 		//How fast the player's jump power increases when we are holding the jump button
@@ -99,9 +99,22 @@ namespace InfiniteHopper
 			//Assign the sound source for easier access
 			if ( GameObject.FindGameObjectWithTag(soundSourceTag) )    soundSource = GameObject.FindGameObjectWithTag(soundSourceTag);
 		}
+
+		// void OnCollisionEnter2D(){
+		// 	print("OnCollisionEnter");
+		// 	PlayerLanded();
+		// }
 		
 		void  Update()
 		{
+					// startJump = false;
+					// isJumping = true;
+					// isLanded = false;
+					// isFalling = false;
+			if(isLanded){
+				print("landed");
+			}
+
 			if ( isDead == false )
 			{
 				//If we are starting to jump, charge up the jump power as long as we are holding the jump button down
