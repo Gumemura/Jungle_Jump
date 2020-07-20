@@ -9,9 +9,16 @@ IPHLootBox
 IPHTimeTracker
 IPHTxtManipulation
 
+Lista de plugins/assets/bibliotecas utilizadas:
+System.IO
+System.Collections.Generic
+UnityEngine.UI
+UnityEngine.Analytics
+
 Alterações gerais:
 - Em "IPHGameController", foram comentadas as funções de UnityEngine.Advertisements foram comentadas pois nas novas versões o UnityAds é ativado diretamente no editor, por isso estava sendo
 acusado erro nas linhas que continham tais funções
+
 
 - Criação do txt: muitos das implementações eram baseadas em dados persistentes. Por isso, para armazena-los, foi criada a classe "IPHCreateTxt". Ela cria dois documentos no formato .txt, sendo um deles 
 responsável por (i) registrar informações gerais (muscia ligada/ desligada, power-ups coletados, e vários outros), e (ii) todos o itens do loot box e seus informações (peso e raridade)
@@ -125,3 +132,4 @@ Coisas que poderiam ter sido melhores:
 unica vez no txt
 - usar PlayerPrefs API para transitar variaveis entre as cenas
 - aglomerar todos os eventos de analytics num unico script
+- barrinha de força acompanhar o coelho no pulo duplo
