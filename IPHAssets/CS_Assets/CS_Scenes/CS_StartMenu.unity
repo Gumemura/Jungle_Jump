@@ -577,11 +577,11 @@ Prefab:
     - target: {fileID: 11456520, guid: 9394676ea2af64542b89d78e1866b82e, type: 2}
       propertyPath: TextManipulator
       value: 
-      objectReference: {fileID: 1053962213}
+      objectReference: {fileID: 0}
     - target: {fileID: 11456514, guid: 9394676ea2af64542b89d78e1866b82e, type: 2}
       propertyPath: TextManipulator
       value: 
-      objectReference: {fileID: 1053962213}
+      objectReference: {fileID: 0}
     - target: {fileID: 11417960, guid: 9394676ea2af64542b89d78e1866b82e, type: 2}
       propertyPath: m_Colors.m_HighlightedColor.r
       value: 0.8
@@ -1150,7 +1150,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeTotal: 0
   hours: 0
-  minutes: 7
+  minutes: 2
   seconds: 0
 --- !u!1 &659873211
 GameObject:
@@ -1696,53 +1696,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &1053962212
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4706028268359722, guid: f6803e10f722e2946b090558ab178ea6, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4706028268359722, guid: f6803e10f722e2946b090558ab178ea6, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4706028268359722, guid: f6803e10f722e2946b090558ab178ea6, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4706028268359722, guid: f6803e10f722e2946b090558ab178ea6, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4706028268359722, guid: f6803e10f722e2946b090558ab178ea6, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4706028268359722, guid: f6803e10f722e2946b090558ab178ea6, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4706028268359722, guid: f6803e10f722e2946b090558ab178ea6, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4706028268359722, guid: f6803e10f722e2946b090558ab178ea6, type: 2}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: f6803e10f722e2946b090558ab178ea6, type: 2}
-  m_IsPrefabAsset: 0
---- !u!4 &1053962213 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4706028268359722, guid: f6803e10f722e2946b090558ab178ea6,
-    type: 2}
-  m_PrefabInternal: {fileID: 1053962212}
 --- !u!1 &1074851051
 GameObject:
   m_ObjectHideFlags: 0
@@ -2438,6 +2391,46 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1455130582
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1455130584}
+  - component: {fileID: 1455130583}
+  m_Layer: 0
+  m_Name: TxtManipulator
+  m_TagString: TxtManipulation
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1455130583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1455130582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5fc0158ed0984d40a311c7998e46c64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1455130584
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1455130582}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1465080305
 GameObject:
@@ -3732,8 +3725,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 249aeb73f46b4884c8b35d0629830ae2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  countIncrease: 1
-  countLimit: 0.5
+  countHoldButtonIncrease: 1
+  countHoldButtonLimit: 0.5
   lootInfoCanvas: {fileID: 1580294069}
   canvasGiveLoot: {fileID: 1782631100}
   lootNameText: {fileID: 1465080306}

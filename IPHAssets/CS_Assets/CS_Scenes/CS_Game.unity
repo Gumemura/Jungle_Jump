@@ -1290,7 +1290,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 437968, guid: 01aa7af6ac2bf074fa9e8972a8a4a35e, type: 2}
       propertyPath: m_RootOrder
-      value: 18
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 11437966, guid: 01aa7af6ac2bf074fa9e8972a8a4a35e, type: 2}
       propertyPath: powerBar
@@ -2742,6 +2742,46 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 409832, guid: b29000ee670ea614fb38de347cb464b9,
     type: 2}
   m_PrefabInternal: {fileID: 1864814762}
+--- !u!1 &1966944174
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1966944176}
+  - component: {fileID: 1966944175}
+  m_Layer: 5
+  m_Name: TxtManipulator
+  m_TagString: TxtManipulation
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1966944175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1966944174}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5fc0158ed0984d40a311c7998e46c64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1966944176
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1966944174}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!224 &2041510682 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 22431368, guid: 308d8abb26797874da0d209ad6af69af,

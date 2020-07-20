@@ -11,37 +11,14 @@ public class IPHTxtManipulation : MonoBehaviour {
 	//All lines of configs txt
 	public static string[] lines;
 
-	// //The time this instance of the txtmanipulator has been in the game
-	// internal float instanceTime = 0;
-
-	// void Awake(){
-	// 	//Imported fom IPH Global Music :)
-
-	// 	//Find all the txtmanipulator objects in the scene
-	// 	GameObject[] txtManipulators = GameObject.FindGameObjectsWithTag("TxtManipulation");
-		
-	// 	//Keep only the txtmanipulator object which has been in the game for more than 0 seconds
-	// 	if(txtManipulators.Length > 1){
-	// 		foreach(var txtManipulator in txtManipulators)
-	// 		{
-	// 			if(txtManipulator.GetComponent<IPHTxtManipulation>().instanceTime <= 0 ){
-	// 				Destroy(gameObject);
-	// 			}    
-	// 		}
-	// 	}
-	// }
-
 	// Use this for initialization
-	void Start () {
+	void Awake () {
 		//establishing the path of configuration txt
 		//Usualy would be used Application.DataPath, but for mobile devices, Application.persistentDataPath works better because we may not have direct write access to the dataPath of the project
 		path = Application.persistentDataPath + "\\configLog.txt";
 
 		//Creating an array ofrom the lines of txt
 		lines = File.ReadAllLines(path);
-		//Making this persistent because will be used by objects in all scenes
-		//DontDestroyOnLoad(transform.gameObject);
-
 	}
 
 	public float ReadTxt(string LineTxt){

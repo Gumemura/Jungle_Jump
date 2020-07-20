@@ -79,12 +79,13 @@ public class IPHTimeTracker : MonoBehaviour {
 		
 		txtManipulator.GetComponent<IPHTxtManipulation>().WriteTxt("sss", ++sessions);
 
-
 		//Perpetuating this object between scenes
 		DontDestroyOnLoad(transform.gameObject);
 
 		//Starting countdown
-		ResumingCoundown();
+		//IMPORTANT: this functions must only be called when playing it on computer
+		//When on mobile, it will be calles when OnApplicationFocus is true
+		//ResumingCoundown();
 	}
 	 
 	void StartCoundownTimer(){
@@ -101,7 +102,7 @@ public class IPHTimeTracker : MonoBehaviour {
 			timeTotal = 0;
 		}
 	}
-	 
+
 	public void UpdateTimer(){
 		if(timeTotal > 0){
 			//And the countdown begins!
@@ -129,7 +130,6 @@ public class IPHTimeTracker : MonoBehaviour {
 	//Here is were stored data on txt and System.DateTime.Now are calculated
 	int CaculateRemainingTime(){
 		//Checking extreme condition that will dispense the need for calculations 
-		//
 		//If month or year is diferent, it means that the game has not been played for quite a while (at least one month)
 		//or
 		//If game has not been played for 2 days, it means that even if the countdown is on its maximum value (24 hours), its already done
@@ -173,7 +173,7 @@ public class IPHTimeTracker : MonoBehaviour {
 	//Set the countdown remaining time and start it
 	//As long its a mobile game, its called on OnApplicationFocus(). Otherwise it would be only called on Start
 	public void ResumingCoundown(){
-		//if txtManipulator in null, look for it 
+		//if txtManipulator is null, look for it 
 		if(!txtManipulator){
 			txtManipulator = GameObject.Find("TxtManipulator").transform;
 		}		
@@ -189,26 +189,34 @@ public class IPHTimeTracker : MonoBehaviour {
 
 	//Here is where date and time data stored in txt. Its called when apllication is suspended
 	//As long its a mobile game, we use OnApplicationPause(). Otherwise it would be used OnApplicationQuit()
+
+	void RegisterQuitTime(){
+		//Storing time information when closing so we will be able to calculate remaining time for countdown when the app starts again
+		txtManipulator.GetComponent<IPHTxtManipulation>().WriteTxt("rmn", timeTotal);
+
+		//Storing date and time so we will be able to compare it to starting app's date
+		txtManipulator.GetComponent<IPHTxtManipulation>().WriteTxt("clh", System.DateTime.Now.Hour);
+		txtManipulator.GetComponent<IPHTxtManipulation>().WriteTxt("clm", System.DateTime.Now.Minute);
+		txtManipulator.GetComponent<IPHTxtManipulation>().WriteTxt("cls", System.DateTime.Now.Second);
+
+		txtManipulator.GetComponent<IPHTxtManipulation>().WriteTxt("cld", System.DateTime.Now.Day);
+		txtManipulator.GetComponent<IPHTxtManipulation>().WriteTxt("cln", System.DateTime.Now.Month);
+		txtManipulator.GetComponent<IPHTxtManipulation>().WriteTxt("cly", System.DateTime.Now.Year);
+		CancelInvoke("UpdateTimer");
+	}
+
 	void OnApplicationPause (bool pauseStatus){
 		if(pauseStatus){
-			//Storing time information when closing so we will be able to calculate remaining time for countdown when the app starts again
-			txtManipulator.GetComponent<IPHTxtManipulation>().WriteTxt("rmn", timeTotal);
-
-			//Storing date and time so we will be able to compare it to starting app's date
-			txtManipulator.GetComponent<IPHTxtManipulation>().WriteTxt("clh", System.DateTime.Now.Hour);
-			txtManipulator.GetComponent<IPHTxtManipulation>().WriteTxt("clm", System.DateTime.Now.Minute);
-			txtManipulator.GetComponent<IPHTxtManipulation>().WriteTxt("cls", System.DateTime.Now.Second);
-
-			txtManipulator.GetComponent<IPHTxtManipulation>().WriteTxt("cld", System.DateTime.Now.Day);
-			txtManipulator.GetComponent<IPHTxtManipulation>().WriteTxt("cln", System.DateTime.Now.Month);
-			txtManipulator.GetComponent<IPHTxtManipulation>().WriteTxt("cly", System.DateTime.Now.Year);
-			CancelInvoke("UpdateTimer");
+			RegisterQuitTime();
 		}
 	}
+
 	//reactivate the countdown. Acts like a Start() method
 	void OnApplicationFocus(bool isFocus){
-		if(isFocus){;
+		if(isFocus){
 			ResumingCoundown();			
+		}else{
+			RegisterQuitTime();		
 		}
 	}
 }
