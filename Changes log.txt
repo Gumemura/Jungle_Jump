@@ -15,6 +15,8 @@ System.Collections.Generic
 UnityEngine.UI
 UnityEngine.Analytics
 
+Tempo Investido: aproximadamente 5 dias 
+
 Alterações gerais:
 - Em "IPHGameController", foram comentadas as funções de UnityEngine.Advertisements foram comentadas pois nas novas versões o UnityAds é ativado diretamente no editor, por isso estava sendo
 acusado erro nas linhas que continham tais funções
@@ -133,3 +135,4 @@ unica vez no txt
 - usar PlayerPrefs API para transitar variaveis entre as cenas
 - aglomerar todos os eventos de analytics num unico script
 - barrinha de força acompanhar o coelho no pulo duplo
+
