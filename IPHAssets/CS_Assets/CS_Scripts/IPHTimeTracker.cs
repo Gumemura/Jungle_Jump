@@ -74,11 +74,17 @@ public class IPHTimeTracker : MonoBehaviour {
 		//Finding txtManipulator, who will provide us the functions to read and write on txt
 		txtManipulator = GameObject.Find("TxtManipulator").transform;
 
+		//Registrering actual session
+		int sessions = (int)txtManipulator.GetComponent<IPHTxtManipulation>().ReadTxt("sss");
+		
+		txtManipulator.GetComponent<IPHTxtManipulation>().WriteTxt("sss", ++sessions);
+
+
 		//Perpetuating this object between scenes
 		DontDestroyOnLoad(transform.gameObject);
 
 		//Starting countdown
-		SetInitialCountdown();
+		ResumingCoundown();
 	}
 	 
 	void StartCoundownTimer(){
@@ -165,8 +171,12 @@ public class IPHTimeTracker : MonoBehaviour {
 	}
 
 	//Set the countdown remaining time and start it
-	//As long its a mobile game, its called on OnApplicationFocus(). Otherwise it would be called on Start
-	public void SetInitialCountdown(){
+	//As long its a mobile game, its called on OnApplicationFocus(). Otherwise it would be only called on Start
+	public void ResumingCoundown(){
+		//if txtManipulator in null, look for it 
+		if(!txtManipulator){
+			txtManipulator = GameObject.Find("TxtManipulator").transform;
+		}		
 		timeTotal = (int)GameObject.Find("TxtManipulator").transform.GetComponent<IPHTxtManipulation>().ReadTxt("rmn") - CaculateRemainingTime();
 		StartCoundownTimer();
 	}
@@ -198,7 +208,7 @@ public class IPHTimeTracker : MonoBehaviour {
 	//reactivate the countdown. Acts like a Start() method
 	void OnApplicationFocus(bool isFocus){
 		if(isFocus){;
-			SetInitialCountdown();
+			ResumingCoundown();			
 		}
 	}
 }

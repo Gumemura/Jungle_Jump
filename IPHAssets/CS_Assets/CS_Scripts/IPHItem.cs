@@ -1,7 +1,9 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using InfiniteHopper.Types;
+using UnityEngine.Analytics;
 
 namespace InfiniteHopper
 {
@@ -12,6 +14,9 @@ namespace InfiniteHopper
 	{
 		//The achievemente manager that will provide us the functions to update data
 		internal Transform achievementeManager;
+
+		//txt manipulations functions
+		internal Transform txtManipulator;
 
 		//The achievemente manager tag we will use to find AchievementeManager tranform
 		public string achievementeManagerTag = "AchievementManager";
@@ -32,9 +37,13 @@ namespace InfiniteHopper
 		public AudioClip soundHit;
 		public string soundSourceTag = "GameController";
 
+		//How many players are unlocked
+		private int unlockedPlayers;
+
 		void Start(){
 			//Finding the achievemente Manager tranform
 			achievementeManager = GameObject.FindWithTag(achievementeManagerTag).transform;
+			txtManipulator = GameObject.Find("TxtManipulator").transform;
 		}
 		
 		//This function runs when this obstacle touches another object with a trigger collider
@@ -50,6 +59,26 @@ namespace InfiniteHopper
 					//Updating data of collected tokens
 					achievementeManager.GetComponent<IPHAchievementsManager>().RaiseCounter("tkn");
 				}
+
+				//Checking how many player are unlocked
+				if((int)txtManipulator.GetComponent<IPHTxtManipulation>().ReadTxt("tkn") >= 25){
+					unlockedPlayers = 25/5 + 1;
+				}else{
+					int tokens = (int)txtManipulator.GetComponent<IPHTxtManipulation>().ReadTxt("tkn");
+
+					unlockedPlayers = tokens/5 + 1;
+				}
+
+				//Seding event when coliding with player
+				AnalyticsEvent.Custom("PowerUp_Collected", new Dictionary<string, object>
+				{
+					{ "PowerUpType", transform.gameObject.name},
+					{ "ActualSession", (int)txtManipulator.GetComponent<IPHTxtManipulation>().ReadTxt("sss")},
+					{ "TopScore", (int)txtManipulator.GetComponent<IPHTxtManipulation>().ReadTxt("scr")},
+					{ "UnlockedPlayers", unlockedPlayers}
+				});
+
+
 
 				//Go through the list of functions and runs them on the correct targets
 				foreach( TouchFunction touchFunction in touchFunctions )

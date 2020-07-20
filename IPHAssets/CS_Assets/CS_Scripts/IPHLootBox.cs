@@ -15,8 +15,8 @@ public class IPHLootBox : MonoBehaviour {
 
 	private bool canCountHold; //Will inform when to start counting how long the button have been pressed
 	private float countHoldButton; //Will count how long the button have been pressed
-	public float countIncrease; //How much the counter will increase
-	public float countLimit; // Limit to the counter
+	public float countHoldButtonIncrease; //How much the counter will increase
+	public float countHoldButtonLimit; // Limit to the counter
 
 	public Transform lootInfoCanvas;
 	public Transform canvasGiveLoot;
@@ -49,8 +49,8 @@ public class IPHLootBox : MonoBehaviour {
 	//This is done with Pointer_Down() and Pointer_Up()
 	private void CheckHoldButton(){
 		if(canCountHold){
-			countHoldButton += countIncrease * Time.deltaTime;
-			if(countHoldButton >= countLimit){
+			countHoldButton += countHoldButtonIncrease * Time.deltaTime;
+			if(countHoldButton >= countHoldButtonLimit){
 				lootInfoCanvas.gameObject.SetActive(true);
 				canCountHold = false;
 			}
@@ -84,7 +84,7 @@ public class IPHLootBox : MonoBehaviour {
 
 	//Called when button is released
 	public void Pointer_Up(){
-		if(countHoldButton < countLimit){
+		if(countHoldButton < countHoldButtonLimit){
 			OnClick();
 		}
 		canCountHold = false;

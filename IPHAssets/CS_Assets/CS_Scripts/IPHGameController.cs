@@ -16,6 +16,9 @@ namespace InfiniteHopper
 	/// </summary>
 	public class IPHGameController:MonoBehaviour 
 	{
+		//Txt manipulation functions
+		public Transform txtManipulator;
+
 		//The player object, and the current player
 		public Transform[] playerObjects;
 		public int currentPlayer = 0;
@@ -143,6 +146,7 @@ namespace InfiniteHopper
 		/// </summary>
 		void Start()
 		{
+			txtManipulator = GameObject.Find("TxtManipulator").transform;
 			//Update the score
 			UpdateScore ();
 		
@@ -157,6 +161,7 @@ namespace InfiniteHopper
             totalPowerups = 0;
 		
 			//Set the current player object
+			//Reading info writed on menu scene
 			currentPlayer = (int)GameObject.Find("TxtManipulator").transform.GetComponent<IPHTxtManipulation>().ReadTxt("act");
 			SetPlayer (currentPlayer);
 		
@@ -206,11 +211,11 @@ namespace InfiniteHopper
 			Pause ();
 
 			//Initialize Unity Ads
-			#if UNITY_ANDROID
-				Advertisement.Initialize ("44169");
-			#elif UNITY_IPHONE
-				Advertisement.Initialize ("44172");
-			#endif
+			// #if UNITY_ANDROID
+			// 	Advertisement.Initialize ("44169");
+			// #elif UNITY_IPHONE
+			// 	Advertisement.Initialize ("44172");
+			// #endif
 		}
 
 		/// <summary>
@@ -397,7 +402,7 @@ namespace InfiniteHopper
 						
 						//Update the text of the bonus object. If we have a streak, display 2X 3X etc
 						if ( currentStreak > 1 )    bonusText.Find("Text").GetComponent<Text>().text = "+" + (landingBonuses[index].bonusValue * currentStreak * scoreMultiplier).ToString() + " " + currentStreak.ToString() + "X";  
-						else    bonusText.Find("Text").GetComponent<Text>().text = "+" + (landingBonuses[index].bonusValue * scoreMultiplier).ToString();
+						else    bonusText.Find("Text").GetComponent<Text>().text = "+ " + (landingBonuses[index].bonusValue * scoreMultiplier).ToString();
 					}
 					
 					//The score has been given, no need to give any more bonus
@@ -491,6 +496,11 @@ namespace InfiniteHopper
 
 			yield return new WaitForSeconds(delay);
 
+			if((int)txtManipulator.GetComponent<IPHTxtManipulation>().ReadTxt("scr") < score)
+			{
+				txtManipulator.GetComponent<IPHTxtManipulation>().WriteTxt("scr", score);
+			}
+
 			//If there is a source and a sound, play it from the source
 			if ( soundSource && soundGameOver )    soundSource.GetComponent<AudioSource>().PlayOneShot(soundGameOver);
 			
@@ -516,11 +526,11 @@ namespace InfiniteHopper
 				}
 				
 				//Write the high sscore text
-				gameOverCanvas.Find("TextHighScore").GetComponent<Text>().text = "HIGH SCORE " + highScore.ToString();
+				gameOverCanvas.Find("TextHighScore").GetComponent<Text>().text = "HIGH SCORE " + txtManipulator.GetComponent<IPHTxtManipulation>().ReadTxt("scr").ToString();
 
 
 				// Show bonus button
-				bonusCanvas.gameObject.SetActive(Advertisement.IsReady());
+				//bonusCanvas.gameObject.SetActive(Advertisement.IsReady());
 
 			}
 		}

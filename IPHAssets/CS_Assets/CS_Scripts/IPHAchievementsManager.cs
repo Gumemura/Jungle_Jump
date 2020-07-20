@@ -130,7 +130,7 @@ public class IPHAchievementsManager : MonoBehaviour {
 		//Will increase the counters of jump, power-up and matches and record it on the txt
 		switch(actionCode) {
 			case "jmp":
-				//Is possible to remove this if and keep track of all progrees play is making
+				//Is possible to remove this 'if' and keep track of all progress play is making
 				if(plataformJumps < maxJumps){
 					textManipulator.GetComponent<IPHTxtManipulation>().WriteTxt("jmp", ++plataformJumps);
 					AcomplishmentCheck(PlataformJump03, plataformJumps);

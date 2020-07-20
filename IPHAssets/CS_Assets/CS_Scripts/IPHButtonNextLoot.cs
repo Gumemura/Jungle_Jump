@@ -16,6 +16,7 @@ public class IPHButtonNextLoot : MonoBehaviour {
 	public Transform buttonNext;
 	public Transform buttonPrevious;
 
+	[Range(0,7)]
 	public int itensDisplayed;
 
 	private string[] lines;

@@ -47,13 +47,18 @@ namespace InfiniteHopper
 			if ( currentPlayer < 0 )    currentPlayer = playerList.Length - 1;
 			
 			SetPlayer(currentPlayer);
+
 		}
 		
 		//This function activates the selected player, while deactivating all the others
 		void  SetPlayer(int playerNumber)
 		{
-			//Writing on txt active 
-			txtManipulator.GetComponent<IPHTxtManipulation>().WriteTxt("act", playerNumber);
+			//Preventing playing with unlocked characters 
+			if(tokens >= playerList[playerNumber].tokensToUnlock){
+				//Writing on txt active player to be loaded on game scene
+				txtManipulator.GetComponent<IPHTxtManipulation>().WriteTxt("act", playerNumber);
+			}
+			
 			//Go through all the players, and hide each one except the current player
 			for( index = 0; index < playerList.Length; index++ )
 			{

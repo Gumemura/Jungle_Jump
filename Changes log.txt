@@ -1,38 +1,127 @@
 Guilherme Umemura
 
-- Coisas que pdoeriam ter sido melhores:
+Novas Classes:
+IPHAchievementsManager
+IPHButtonNextLoot
+IPHCountdownText
+IPHCreateTxt
+IPHLootBox
+IPHTimeTracker
+IPHTxtManipulation
+
+Alterações gerais:
+- Em "IPHGameController", foram comentadas as funções de UnityEngine.Advertisements foram comentadas pois nas novas versões o UnityAds é ativado diretamente no editor, por isso estava sendo
+acusado erro nas linhas que continham tais funções
+
+- Criação do txt: muitos das implementações eram baseadas em dados persistentes. Por isso, para armazena-los, foi criada a classe "IPHCreateTxt". Ela cria dois documentos no formato .txt, sendo um deles 
+responsável por (i) registrar informações gerais (muscia ligada/ desligada, power-ups coletados, e vários outros), e (ii) todos o itens do loot box e seus informações (peso e raridade)
+
+- Assegurada a criação do .txt, foi implementada a Classe "IPHTxtManipulation" que, como o própri nome sugere, manipula as informações do .txt. Suas funções são:
+	- ReadTxt(string LineTxt) => pecorre as linhas do txt e retona o valor, como um float, do códidgo (LineTxt) oferecido como parâmetro. Retorna um float e não um int pois sua conversão 
+	para inteiro acarreta em perda de dados (os decimais) desejada pelo usuário, mas não o contrário
+
+	- WriteTxt(string LineTxt, float NewValue) => percorre as linhas, encontra aquela com o código inserido como parâmentro (LineTxt) e altera seu valor (NewValue)
+
+	- Essas funções são usadas pelas seguitnes classes:
+		IPHAchievementsManager
+		IPHGameController
+		IPHItem
+		IPHPlayerSelection
+		IPHStatistics
+		IPHTimeTracker
+		IPHToggleSound
+
+1) Configuração de Som
+	Clicar nos botoes altera o registro no txt para 0 (false, desligado, ou para 1, ligado). Na função ToggleSound(), chamada quando algum dos botões de som é apertado, o novo valor 
+	é registrado no .txt
+
+	Quando o jogo é iniciado, os valores dos .txt são lidos e atribuidos as respectivas configurações
+
+2) Achievements (conquistas)
+	A organização das conquistas é feita por meio da classe "IPHAchievementsManager". Sua principal função é RaiseCounter() que registra no txt novas infos e checa se condições de 
+	vitória foram alcançadas. Ela é chamada por outros scripts quando fato relevante é desencadeado - mais especificamente falando, ela é chamada em "IPHItem" dentro da 
+	função OnTriggerEnter2D(), e na "IPHPlayer", dentro da PlayerLanded().
+
+	Etapas para adicionar uma conquista:
+	1 - no "IPHCreateTxt", criar uma linha para a nova conquista
+	2 - em "IPHAchievementsManager", criar uma nova arrayLista
+	3 - ainda em "IPHAchievementsManager", nas funções GetTxtValues() e RaiseCounter(), inserir os devidos 'if' para o registro de novas informações e checagem de vitória
+
+3)Chest Reward
+	Classes envolvidas:
+		IPHLootBox
+		IPHTimeTracker
+		IPHButtonNextLoot
+		IPHCountdownText
+
+		== IPHLootBox: anexada ao botão de reward (LootBox). Ela é responsável por analisar se o botão foi apenas pressionado ou segurado por meio da função CheckHoldButton(), e
+		selecionar um prêmio SelectedLoot() e exibi-lo ao jogador ao ativar o canvas de lootbox
+		- tem as seguintes variáveis publicas:
+			countHoldButtonIncrease = é um contador que conta por quanto tempo o botão de loot box foi apertado. Indica quanto o contador vai aumentar por segundo
+			countHoldButtonLimit = limite do countHoldButtonIncrease. Se o contador atigir esse limite, o botão foi apertado por um periodo, acarretando na abertura do canvas 
+				de informações dos itens disponíveis na lootbox
+			lootInfoCanvas = o canvas com informações dos itens disponíveis no lootbox
+			canvasGiveLoot = o canvas que exibirá o item dado pelo lootbox
+			lootNameText = o objeto com o componente 'Text', que esta dentro de 'canvasGiveLoot', que exibirá o nome e raridade do item dado 
+
+		== IPHTimeTracker: é ele quem acompanha o tempo decorrido e informa se o botão de loot box pode ou não ser ativado. Como ele funciona:
+		- ele é persistente, ou seja, não é destruido quando do carregamento de outra cena (DontDestroyOnLoad())
+		- anexado ao gameObject de nome "LootBoxTime"
+		- enquanto o jogo é foco (OnApplicationFocus()), o tempo decorre normalmente, quando não (OnApplicationPause()), a data e horário do fechamento/suspensão é registrado no txt.
+		Quando o jogo volta a ser foco ou é reaberto, é feito calculo entre a data e horário registrado e data e horário da abertura, sendo o resultado o tempo restante para o botão 
+		ficar disponível
+		- Existem 3 variáveis públicas que marcam o intervalo de tempo a ser contado, sendo elas as seguinte: 'hours', 'minutes' e 'seconds'. O limite desse período é de 25 horas
+
+		== IPHButtonNextLoot: quando exibido o canvas dos itens disponivel, essa classe atualiza os itens exibidos
+		- anexado ao gameObject "Text", que esta dentro de "CanvasInfoLoot"
+		- tem as seguintes variáveis públicas:
+			itensName = objeto com o componente 'Text' e que exibira o nome dos itens
+			itensOd = objeto com o componente 'Text' e que exibira a probabilidade dositens serem selecionados
+			itensRarity = objeto com o componente 'Text' e que exibira a raridade de cada item
+
+			buttonNext = objeto com o componente 'Button' que atualizará os itens exibidos de forma progressiva
+			buttonPrevious = objeto com o componente 'Button' que atualizará os itens exibidos de forma regressiva
+
+			itensDisplayed = quantidade de itens que serão exibidos de uma única vez na tela (limite de 7)
+
+		IPHCountdownText: essa classe tem apenas uma função de destaque: Shake(). Essa, por sua vez, faz com que o text do componente 'Text' cresca e diminua de tamanho caso o bota
+		clicado enquanto o período de contagem do botao de lootbox ainda nao terminou
+
+4)Analytics
+	PowerUp_Collected: inserida função que dispara o evento dentro da classe "IPHItem"
+	SoundConfigChanged: inserida função que dispara o evento dentro da classe "IPHToggleSound"
+
+
+5)Known Issues
+	Ticket 1: O evento de analytics GameEnded está sendo enviado mais de uma vez.
+	- não foi encontrado nenhum evento de GameEnded entre os objetos presentes em ambas as cenas
+
+	Ticket 2: O jogo frequentemente entra em um estado de block quando se pula e o personagem cai na mesma plataforma em que ele já estava
+	Bug corrigido
+	- Causa: uma das condições para chamar o método PlayerLanded(), na classe "IPHPlayer", que avalia se o player colidiu com um pilar, era a seguinte:
+
+								coll.transform.position.y > thisTransform.position.y
+
+	sendo coll.transform o transform do player e o outro da coluna que é sempre -2. No bug, o player entrava em queda livre, assumia um Y próximo a 2 (geralmente algo
+	como -1,98 e -1,99) mas suficiente para tornar falsa a condição. Logo, havia contato entre ambos (oque impedia a queda e o conseguinte estado de game over) mas a segunda 
+	condição não era cumprida, não sendo, assim, a função PlayerLanded() invocada.
+	
+	- Solução: na nova condição, cujo código segue abaixo, foi dado um "bônus" ao y do player pois caso esse esteja 0,1 abaixo da coluna, muito provavelmente entrará em queda
+	livre e ativará o game over. Segue o novo código:
+
+								coll.transform.position.y + .1f > thisTransform.position.y
+
+	Obs.: essa condição serve para coibir a contabilização de contato lateral entre o player e a coluna. Outra solução seria criar dois collider entre o da coluna para que esse se chocassem lateralmente com o player. Uma espécie de guarda
+
+6)Novas Mecânicas
+	Existe a variável doubleJumpCount que conta a quantidade de pulos dados. Enquanto seu valor for menor ou igual a 1, poderá ser daod um segundo pulo
+
+	Dash(): adiciona o dash para o gatinho. doubleJumpCount tem a mesma função
+
+
+Coisas que poderiam ter sido melhores:
 - na classe IPHTxtManipulator, tornar as funções estáticas
 - Ao inves de sempre alterar tudo no txt, alterar variaveis, estoca-las num unico objeto e usar OnApplicationQuit() ou semelhante para registra-los de uma 
 unica vez no txt
 - usar PlayerPrefs API para transitar variaveis entre as cenas
-
-
-Changes log
-
-IPHGameController
-	initialization of unity ads droped to the last execution of Start() function because it's was preventing the function to be called on mobile devices
-
-- Persistent sound
-A txt file is created to stores user's input. When game is launched, its contents is read and designated to proper configuration 
-
-New class: IPHCreateTxt
-	Creates a txt files that will store all persistent data
-	also stores achievements conditions
-
-New class: IPHTxtManipulation
-	have two functions: one reads a txt, another one writes on it
-	planned to be globaly used
-
-- Achievement
-New class: IPHAchievementsManager
-	its manage the Achievements
-	stores data in persistent form, trought txt (same used to store sound configurations)
-
-Classes existentes alteradas:
-	IPHPlayer
-	IPHItens
-
-	Em ambas foram inseridas funcoes que registram acontecimentos relevantes para os achievements
-
-- LootBox
-Nova classe: 
+- aglomerar todos os eventos de analytics num unico script

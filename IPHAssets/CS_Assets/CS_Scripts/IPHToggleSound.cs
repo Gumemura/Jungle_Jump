@@ -2,6 +2,8 @@
 using System.Collections;
 using UnityEngine.UI;
 using System.IO;
+using UnityEngine.Analytics;
+using System.Collections.Generic;
 
 namespace InfiniteHopper
 {
@@ -15,7 +17,7 @@ namespace InfiniteHopper
 		private string soundTarget;
 
 		//The object that will provide the function to read and write on txt 
-		private Transform textManipulator;
+		private Transform txtManipulator;
 
 		//The tag of the sound object
 		public string soundObjectTag = "GameController";
@@ -25,6 +27,9 @@ namespace InfiniteHopper
 	
 		// The index of the current value of the sound
 		internal float currentState = 1;
+
+		//Unlocked players
+		private int unlockedPlayers;
 	
 		/// <summary>
 		/// Awake is called when the script instance is being loaded.
@@ -47,9 +52,9 @@ namespace InfiniteHopper
 				soundTarget = "msc"; //Music
 			}
 
-			textManipulator = GameObject.Find("TxtManipulator").transform;
+			txtManipulator = GameObject.Find("TxtManipulator").transform;
 
-			currentState = textManipulator.GetComponent<IPHTxtManipulation>().ReadTxt(soundTarget);
+			currentState = txtManipulator.GetComponent<IPHTxtManipulation>().ReadTxt(soundTarget);
 
 			SetSound();
 		}
@@ -92,9 +97,29 @@ namespace InfiniteHopper
 			}
 
 			//Writing on the txt
-			textManipulator.GetComponent<IPHTxtManipulation>().WriteTxt(soundTarget, currentState);
+			txtManipulator.GetComponent<IPHTxtManipulation>().WriteTxt(soundTarget, currentState);
 
 			SetSound();
+
+			//Checking how many player are unlocked
+			if((int)txtManipulator.GetComponent<IPHTxtManipulation>().ReadTxt("tkn") >= 25){
+				unlockedPlayers = 25/5 + 1;
+			}else{
+				int tokens = (int)txtManipulator.GetComponent<IPHTxtManipulation>().ReadTxt("tkn");
+
+				unlockedPlayers = tokens/5 + 1;
+			}
+
+			//Seding eventenabling/disbaling sound
+			AnalyticsEvent.Custom("SoundConfigChanged:", new Dictionary<string, object>
+			{
+				{ "ChangedConfig", soundTarget == "snd"? "SFX": "Music"},
+				{ "NewSoundStatus", currentState},
+
+				{ "ActualSession", (int)txtManipulator.GetComponent<IPHTxtManipulation>().ReadTxt("sss")},
+				{ "TopScore", (int)txtManipulator.GetComponent<IPHTxtManipulation>().ReadTxt("scr")},
+				{ "UnlockedPlayers", unlockedPlayers}
+			});
 		}
 	
 		/// <summary>
